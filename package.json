@@ -1,0 +1,21 @@
+{
+  "name": "sooohka-ui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev":"tsup src/index.ts --format cjs,esm --dts --watch --onSuccess 'node dist/index.js'",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "changeSet": "changeset"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}
