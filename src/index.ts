@@ -1,5 +1,4 @@
-export * from "./components";
+export * from './components';
+export * from './types';
 
-export type { Tw } from "./utils";
-
-console.log("hello world");
+console.log('hello world');
