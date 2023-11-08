@@ -1,1 +1,1 @@
-export type { Tw } from "./taliwind";
+export { default as useComponentState } from './useComponentState';
