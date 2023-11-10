@@ -2,20 +2,19 @@ export interface UseComponentStateProps {
   isRequired?: boolean;
   isDisabled?: boolean;
   isInvalid?: boolean;
-  isReadOnly?: boolean;
+  isReadonly?: boolean;
 }
 
 export default function useComponentState(props: UseComponentStateProps) {
-  const { isDisabled, isInvalid, isReadOnly, isRequired } = props;
+  const { isDisabled, isInvalid, isReadonly, isRequired } = props;
 
   return {
-    invalid: isInvalid,
     disabled: isDisabled,
-    readOnly: isReadOnly,
+    readOnly: isReadonly,
     required: isRequired,
     'aria-invalid': isInvalid,
     'aria-required': isRequired,
-    'aria-readonly': isReadOnly,
+    'aria-readonly': isReadonly,
     "aria-disabled": isDisabled,
   };
 }

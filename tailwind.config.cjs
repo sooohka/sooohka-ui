@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      aria: {
+        invalid: 'invalid="true"',
+      },
       colors: {
         primary: {
           50: '#f1f9fe',
