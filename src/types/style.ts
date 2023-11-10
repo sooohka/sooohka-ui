@@ -1,3 +1,3 @@
 export type ColorScheme = 'primary';
 
-export type Size = 'md';
+export type Size = 'sm' | 'md' | 'lg';

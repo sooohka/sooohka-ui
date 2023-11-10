@@ -1,4 +1,3 @@
-import { BeakerIcon } from '@heroicons/react/24/solid';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Checkbox } from '@/components';
@@ -6,7 +5,7 @@ import { Checkbox } from '@/components';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: 'Example/Checkbox',
-  component: () => <Checkbox />,
+  component: () => <Checkbox>hi</Checkbox>,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
@@ -16,10 +15,16 @@ const meta = {
       control: { type: 'select' },
     },
     size: {
-      options: ['md'],
+      options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
     isDisabled: {
+      control: { type: 'boolean' },
+    },
+    isInvalid: {
+      control: { type: 'boolean' },
+    },
+    isReadonly: {
       control: { type: 'boolean' },
     },
   },

@@ -9,7 +9,6 @@ export default function useComponentState(props: UseComponentStateProps) {
   const { isDisabled, isInvalid, isReadonly, isRequired } = props;
 
   return {
-    invalid: isInvalid,
     disabled: isDisabled,
     readOnly: isReadonly,
     required: isRequired,
