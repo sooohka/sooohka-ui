@@ -1,5 +1,11 @@
 # sooohka-ui
 
+## 0.0.5
+
+### Patch Changes
+
+- 9e92e79: add checkbox
+
 ## 0.0.4
 
 ### Patch Changes
