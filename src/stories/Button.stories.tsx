@@ -16,11 +16,11 @@ const meta = {
       control: { type: 'select' },
     },
     size: {
-      options: ['md'],
+      options: ['sm', 'md', 'lg', 'icon'],
       control: { type: 'select' },
     },
     variant: {
-      options: ['solid', 'outline', 'icon'],
+      options: ['solid', 'outline', 'ghost', 'link'],
       control: { type: 'select' },
     },
     isDisabled: {
@@ -38,6 +38,7 @@ export const PrimarySolid: Story = {
     colorScheme: 'primary',
     size: 'md',
     variant: 'solid',
+    onClick: () => console.log('hi'),
   },
   render: (args) => <Button {...args}>{'hello'}</Button>,
 };
@@ -50,15 +51,33 @@ export const PrimaryOutline: Story = {
   render: (args) => <Button {...args}>{'hello'}</Button>,
 };
 
-export const PrimaryIcon: Story = {
+export const PrimaryLink: Story = {
   args: {
     colorScheme: 'primary',
     size: 'md',
-    variant: 'icon',
+    variant: 'link',
+  },
+  render: (args) => <Button {...args}>hello</Button>,
+};
+
+export const PrimaryGhost: Story = {
+  args: {
+    colorScheme: 'primary',
+    size: 'md',
+    variant: 'ghost',
+  },
+  render: (args) => <Button {...args}>hello</Button>,
+};
+
+export const PrimaryIcon: Story = {
+  args: {
+    colorScheme: 'primary',
+    size: 'icon',
+    variant: 'outline',
   },
   render: (args) => (
     <Button {...args}>
-      <BeakerIcon />
+      <BeakerIcon></BeakerIcon>
     </Button>
   ),
 };
