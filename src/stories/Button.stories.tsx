@@ -26,6 +26,12 @@ const meta = {
     isDisabled: {
       control: { type: 'boolean' },
     },
+    LeftIcon: {
+      control: { type: 'ReactNode' },
+    },
+    RightIcon: {
+      control: { type: 'ReactNode' },
+    },
   },
 } satisfies Meta<typeof Button>;
 
@@ -38,6 +44,8 @@ export const PrimarySolid: Story = {
     colorScheme: 'primary',
     size: 'md',
     variant: 'solid',
+    LeftIcon: BeakerIcon,
+
     onClick: () => console.log('hi'),
   },
   render: (args) => <Button {...args}>{'hello'}</Button>,
@@ -47,6 +55,7 @@ export const PrimaryOutline: Story = {
     colorScheme: 'primary',
     size: 'md',
     variant: 'outline',
+    RightIcon: BeakerIcon,
   },
   render: (args) => <Button {...args}>{'hello'}</Button>,
 };

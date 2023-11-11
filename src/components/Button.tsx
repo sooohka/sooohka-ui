@@ -1,45 +1,54 @@
-import * as React from 'react';
+import { ButtonHTMLAttributes, ComponentType, forwardRef, SVGAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
 import { useComponentState } from '@/utils';
 
 const buttonVariants = tv({
-  base: 'inline-flex select-none items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+  slots: {
+    button:
+      'inline-flex items-center rounded-lg text-center text-sm font-medium transition-all focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:opacity-40',
+    icon: '',
+  },
   variants: {
     variant: {
-      solid: 'shadow-sm',
-      outline: 'border-1  bg-transparent shadow-sm',
-      ghost: 'disabled:hover:bg-inherit',
-      link: 'text-primary underline-offset-4 hover:underline disabled:no-underline',
+      solid: { button: 'border shadow-sm' },
+      outline: { button: 'border shadow-sm' },
+      ghost: { button: 'border-none shadow-none ' },
+      link: { button: 'border-none underline-offset-4 shadow-none hover:underline disabled:no-underline' },
     },
     size: {
-      sm: 'h-8 rounded-md px-3 text-xs',
-      md: 'h-9 px-4 py-2',
-      lg: 'h-10 rounded-md px-8',
-      icon: 'h-9 w-9 p-2',
+      sm: { button: 'gap-1 px-3 py-1.5 text-xs', icon: 'h-3 w-3' },
+      md: { button: 'gap-1.5 px-4 py-2 text-sm ', icon: 'h-4 w-4' },
+      lg: { button: 'gap-2 px-4 py-2.5 text-lg ', icon: 'h-5 w-5' },
+      icon: { button: 'h-9 w-9 p-2' },
     },
     colorScheme: {
-      primary: '',
-      secondary: '',
+      primary: { button: '' },
+      secondary: { button: '' },
     },
   },
-  compoundVariants: [
+  compoundSlots: [
     {
+      slots: ['button'],
       colorScheme: 'primary',
       variant: 'solid',
       class: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 disabled:hover:bg-primary-500',
     },
     {
+      slots: ['button'],
       colorScheme: 'primary',
       variant: 'outline',
-      class: 'border-primary-300 text-primary-500 hover:border-primary-500 active:border-primary-700 active:shadow-primary-50 disabled:hover:border-primary-300',
+      class:
+        'border-primary-300 text-primary-500 hover:border-primary-500 active:border-primary-700 active:shadow-primary-50 disabled:hover:border-primary-300',
     },
     {
+      slots: ['button'],
       colorScheme: 'primary',
       variant: 'ghost',
-      class: 'text-primary-500 hover:bg-primary-50 active:bg-primary-100',
+      class: 'text-primary-500 hover:bg-primary-50 active:bg-primary-100 disabled:hover:bg-inherit',
     },
     {
+      slots: ['button'],
       colorScheme: 'primary',
       variant: 'link',
       class: 'text-primary-500',
@@ -52,14 +61,26 @@ const buttonVariants = tv({
   },
 });
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+const { button, icon } = buttonVariants();
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   isDisabled?: boolean;
+  LeftIcon?: ComponentType<SVGAttributes<HTMLOrSVGElement>>;
+  RightIcon?: ComponentType<SVGAttributes<HTMLOrSVGElement>>;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, variant, colorScheme, isDisabled, size, ...rest } = props;
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const { className, variant, colorScheme, isDisabled, size, children, LeftIcon, RightIcon, ...rest } = props;
   const stateProps = useComponentState({ isDisabled });
-  return <button className={buttonVariants({ variant, size, colorScheme, className })} ref={ref} {...stateProps} {...rest} />;
+  return (
+    <>
+      <button className={button({ variant, size, colorScheme, className })} ref={ref} {...stateProps} {...rest}>
+        {LeftIcon && <LeftIcon className={icon({ size })}></LeftIcon>}
+        {children}
+        {RightIcon && <RightIcon className={icon({ size })}></RightIcon>}
+      </button>
+    </>
+  );
 });
 Button.displayName = 'Button';
 
