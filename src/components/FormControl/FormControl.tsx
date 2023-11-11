@@ -3,8 +3,8 @@
 import { DOMAttributes, forwardRef } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
-import { UseComponentStateProps } from '@/utils/useComponentState';
+import { useComponentState } from '@/hooks';
+import { UseComponentStateProps } from '@/hooks/useComponentState';
 
 const formControlVariants = tv({
   slots: {
@@ -31,7 +31,7 @@ const formControlVariants = tv({
   },
 });
 const { container, label } = formControlVariants();
-export interface TextfieldProps
+export interface FormControlProps
   extends Omit<DOMAttributes<HTMLLabelElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur' | 'children'>,
     VariantProps<typeof formControlVariants> {
   label?: string;
@@ -44,7 +44,7 @@ export interface TextfieldProps
   children: (data: UseComponentStateProps) => JSX.Element;
 }
 
-const FormControl = forwardRef<HTMLLabelElement, TextfieldProps>((props, ref) => {
+const FormControl = forwardRef<HTMLLabelElement, FormControlProps>((props, ref) => {
   const {
     className,
     orientation,

@@ -3,7 +3,7 @@
 import { DOMAttributes, forwardRef, InputHTMLAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
+import { useComponentState } from '@/hooks';
 
 const checkboxVariants = tv({
   slots: {

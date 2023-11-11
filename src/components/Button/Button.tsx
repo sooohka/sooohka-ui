@@ -1,7 +1,7 @@
 import { ComponentType, DOMAttributes, forwardRef, SVGAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
+import { useComponentState } from '@/hooks';
 
 const buttonVariants = tv({
   slots: {

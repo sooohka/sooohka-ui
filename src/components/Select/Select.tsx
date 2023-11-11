@@ -2,7 +2,7 @@
 import { DOMAttributes, forwardRef, ReactNode, SelectHTMLAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
+import { useComponentState } from '@/hooks';
 
 const selectVariants = tv({
   slots: {
