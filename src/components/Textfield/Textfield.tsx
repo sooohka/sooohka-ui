@@ -105,5 +105,6 @@ const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
     </div>
   );
 });
+Textfield.displayName = 'Textfield';
 
 export default Textfield;

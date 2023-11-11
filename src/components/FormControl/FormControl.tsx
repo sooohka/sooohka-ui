@@ -66,4 +66,6 @@ const FormControl = forwardRef<HTMLLabelElement, TextfieldProps>((props, ref) =>
   );
 });
 
+FormControl.displayName = 'FormControl';
+
 export default FormControl;
