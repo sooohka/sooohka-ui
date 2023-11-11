@@ -1,30 +1,30 @@
 'use client';
 
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import * as React from 'react';
-import { tv } from 'tailwind-variants';
+import { DOMAttributes, forwardRef, InputHTMLAttributes } from 'react';
+import { tv, VariantProps } from 'tailwind-variants';
 
 import { useComponentState } from '@/utils';
 
-import { ColorScheme, Size } from '../..';
-
 const checkboxVariants = tv({
   slots: {
-    container:
-      'group inline-flex items-center  aria-disabled:cursor-not-allowed aria-disabled:opacity-40 aria-readonly:pointer-events-none',
-    label: 'group-aria-invalid:text-red-500 font-medium ',
+    container: `group inline-flex items-center 
+      aria-disabled:cursor-not-allowed aria-disabled:opacity-40
+      aria-readonly:pointer-events-none`,
+    label: `font-medium
+    group-aria-invalid:text-red-500`,
     controlContainer: 'relative flex cursor-pointer items-center rounded-full',
-    control:
-      "before:content[''] group-aria-invalid:border-red-500 group-aria-invalid:text-red-500 peer relative h-5 w-5 cursor-pointer appearance-none border transition-all duration-150",
-    indicator:
-      'pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100',
+    control: `before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none border transition-all duration-150 
+      group-aria-invalid:border-red-500 group-aria-invalid:text-red-500`,
+    indicator: `pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100`,
     indicatorIcon: '',
   },
   variants: {
     colorScheme: {
       primary: {
         label: 'text-primary-500',
-        control: `border-primary-500 text-primary-500 checked:border-primary-500 checked:bg-primary-500 checked:before:bg-primary-500
+        control: `border-primary-500 text-primary-500 
+        checked:border-primary-500 checked:bg-primary-500 checked:before:bg-primary-500
         `,
       },
       secondary: {},
@@ -42,21 +42,60 @@ const checkboxVariants = tv({
 });
 const { container, label, controlContainer, indicator, indicatorIcon, control } = checkboxVariants();
 
-interface Props {
+export interface CheckboxProps
+  extends Omit<DOMAttributes<HTMLLabelElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
+    VariantProps<typeof checkboxVariants> {
+  className?: string | undefined;
   children: React.ReactNode;
-  colorScheme?: ColorScheme;
-  size?: Size;
   isDisabled?: boolean;
   isInvalid?: boolean;
   isReadonly?: boolean;
+
+  name?: InputHTMLAttributes<HTMLInputElement>['name'];
+  value?: InputHTMLAttributes<HTMLInputElement>['value'];
+  checked?: InputHTMLAttributes<HTMLInputElement>['checked'];
+  onKeyDown?: InputHTMLAttributes<HTMLInputElement>['onKeyDown'];
+  onKeyUp?: InputHTMLAttributes<HTMLInputElement>['onKeyUp'];
+  onChange?: InputHTMLAttributes<HTMLInputElement>['onChange'];
+  onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
 }
-const Checkbox = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { size, colorScheme, children, isDisabled, isInvalid, isReadonly } = props;
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
+  const {
+    size,
+    colorScheme,
+    className,
+    children,
+    isDisabled,
+    isInvalid,
+    isReadonly,
+
+    checked,
+    name,
+    value,
+    onKeyDown,
+    onKeyUp,
+    onChange,
+    onBlur,
+
+    ...rest
+  } = props;
   const stateProps = useComponentState({ isDisabled, isInvalid, isReadonly });
   return (
-    <label {...stateProps} className={container({ size, colorScheme })}>
+    <label {...stateProps} className={container({ size, colorScheme, className })} {...rest}>
       <div className={controlContainer({ size, colorScheme })}>
-        <input ref={ref} type="checkbox" className={control({ size, colorScheme })} {...stateProps} />
+        <input
+          ref={ref}
+          type="checkbox"
+          name={name}
+          value={value}
+          checked={checked}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={control({ size, colorScheme })}
+          {...stateProps}
+        />
         <div className={indicator({ size, colorScheme })}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

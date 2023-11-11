@@ -15,6 +15,6 @@ export default function useComponentState(props: UseComponentStateProps) {
     'aria-invalid': isInvalid,
     'aria-required': isRequired,
     'aria-readonly': isReadonly,
-    "aria-disabled": isDisabled,
+    'aria-disabled': isDisabled,
   };
 }
