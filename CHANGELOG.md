@@ -1,5 +1,11 @@
 # sooohka-ui
 
+## 0.0.7
+
+### Patch Changes
+
+- d7b7b88: add select component
+
 ## 0.0.6
 
 ### Patch Changes
