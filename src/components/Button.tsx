@@ -6,7 +6,7 @@ import { useComponentState } from '@/utils';
 const buttonVariants = tv({
   slots: {
     button:
-      'inline-flex items-center rounded-lg text-center text-sm font-medium transition-all focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:opacity-40',
+      'inline-flex items-center rounded-lg text-center text-sm font-medium transition-all duration-150 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:opacity-40',
     icon: '',
   },
   variants: {

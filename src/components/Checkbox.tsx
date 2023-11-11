@@ -11,11 +11,11 @@ import { ColorScheme, Size } from '..';
 const checkboxVariants = tv({
   slots: {
     container:
-      'group inline-flex items-center gap-2 aria-disabled:cursor-not-allowed aria-disabled:opacity-40 aria-readonly:pointer-events-none',
+      'group inline-flex items-center  aria-disabled:cursor-not-allowed aria-disabled:opacity-40 aria-readonly:pointer-events-none',
     label: 'group-aria-invalid:text-red-500 font-medium ',
     controlContainer: 'relative flex cursor-pointer items-center rounded-full',
     control:
-      "before:content[''] group-aria-invalid:border-red-500 group-aria-invalid:text-red-500 peer relative h-5 w-5 cursor-pointer appearance-none border transition-all ",
+      "before:content[''] group-aria-invalid:border-red-500 group-aria-invalid:text-red-500 peer relative h-5 w-5 cursor-pointer appearance-none border transition-all duration-150",
     indicator:
       'pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100',
     indicatorIcon: '',
@@ -30,9 +30,9 @@ const checkboxVariants = tv({
       secondary: {},
     },
     size: {
-      sm: { control: 'h-[18px] w-[18px] rounded-md', label: 'text-sm', indicatorIcon: 'h-3 w-3' },
-      md: { control: 'h-5 w-5 rounded-md', label: 'text-lg', indicatorIcon: 'h-3.5 w-3.5' },
-      lg: { control: 'h-6 w-6 rounded-md', label: 'text-2xl', indicatorIcon: 'h-4 w-4' },
+      sm: { container: 'gap-1', control: 'h-3 w-3 rounded-[0.2rem] ', label: 'text-xs', indicatorIcon: 'h-3 w-3' },
+      md: { container: 'gap-1.5', control: 'h-4 w-4 rounded-[0.3rem]', label: 'text-sm', indicatorIcon: 'h-3.5 w-3.5' },
+      lg: { container: 'gap-2', control: 'h-5 w-5 rounded-md', label: 'text-lg', indicatorIcon: 'h-4 w-4' },
     },
   },
   defaultVariants: {
