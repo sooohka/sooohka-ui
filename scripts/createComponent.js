@@ -35,9 +35,9 @@ function create() {
 import ${componentName} from './${componentName}';
 
 const meta: Meta<typeof ${componentName}> = {
-    component: ${componentName},
-    tags: ['autodocs'],
-    argTypes: {},
+  component: ${componentName},
+  tags: ['autodocs'],
+  argTypes: {},
 };
 
 export default meta;
@@ -45,17 +45,28 @@ export default meta;
 type Story = StoryObj<typeof ${componentName}>;
 
 export const Basic: Story = {
-    args: {},
-    render: (args) => <${componentName} {...args} />,
+  args: {},
+  render: (args) => <${componentName} {...args} />,
 };
-    `;
+`;
   const componentTemplate = `'use client';
-interface Props {}
+import { DOMAttributes, forwardRef } from 'react';
+import { tv, VariantProps } from 'tailwind-variants';
 
-export default function ${componentName}(props: Props) {
-    const {} = props;
-    return <></>;
+const ${componentName.toLocaleLowerCase()}Variants = tv({});
+
+export interface ${componentName}Props
+  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
+    VariantProps<typeof ${componentName.toLocaleLowerCase()}Variants> {
+  className?: string | undefined;
 }
+
+const ${componentName} = forwardRef<HTMLDivElement, ${componentName}Props>((props, ref) => {
+  const { className, ...rest } = props;
+  return <></>;
+});
+
+export default ${componentName};
     `;
   const indexTemplate = `export { default as ${componentName} } from './${componentName}';`;
   fs.mkdirSync(componentFolderPath);

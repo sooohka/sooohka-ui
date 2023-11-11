@@ -7,14 +7,16 @@ import { useComponentState } from '@/utils';
 
 const textfieldVariants = tv({
   slots: {
-    fieldContainer: `flex w-full cursor-text  items-center rounded-md border border-gray-500 shadow-sm 
-      focus-within:border-primary-500 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50 
-      group-aria-disabled:cursor-not-allowed
-      group-aria-readonly:cursor-default group-aria-invalid:border-red-500 group-aria-invalid:ring-red-200
-      group-aria-invalid:ring-opacity-50
+    fieldContainer: `group flex w-full  cursor-text items-center rounded-md border border-gray-500 
+    shadow-sm focus-within:border-primary-500 focus-within:ring focus-within:ring-primary-200
+      focus-within:ring-opacity-50
+      aria-disabled:cursor-not-allowed aria-disabled:opacity-40
+      aria-readonly:pointer-events-none
+      aria-invalid:border-red-500 aria-invalid:ring-red-200
+      aria-invalid:ring-opacity-50
       `,
     field: `flex-grow appearance-none outline-none
-      group-aria-disabled:cursor-not-allowed
+      aria-disabled:cursor-not-allowed
     `,
     addon: 'inline-flex h-full max-h-full w-fit items-center justify-center',
   },
@@ -83,7 +85,7 @@ const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
   } = props;
   const stateProps = useComponentState({ isDisabled, isInvalid, isReadonly, isRequired });
   return (
-    <div className={fieldContainer({ size, className })} {...rest}>
+    <div className={fieldContainer({ size, className })} {...stateProps} {...rest}>
       {LeftAddon && <span className={addon({ size })}>{LeftAddon}</span>}
       <input
         className={field({ size })}
@@ -96,6 +98,7 @@ const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
+        tabIndex={isReadonly ? -1 : undefined}
         {...stateProps}
       ></input>
       {RightAddon && <span className={addon({ size })}>{RightAddon}</span>}
