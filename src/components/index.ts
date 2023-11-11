@@ -1,2 +1,3 @@
-export {default as Button}from './Button'
-export {default as Checkbox}from './Checkbox'
+export * from './Button';
+export * from './Checkbox';
+export * from './Textfield';

@@ -6,7 +6,7 @@ import { tv } from 'tailwind-variants';
 
 import { useComponentState } from '@/utils';
 
-import { ColorScheme, Size } from '..';
+import { ColorScheme, Size } from '../..';
 
 const checkboxVariants = tv({
   slots: {
