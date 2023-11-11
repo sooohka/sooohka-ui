@@ -1,5 +1,12 @@
 # sooohka-ui
 
+## 0.0.6
+
+### Patch Changes
+
+- 7a12035: add formcontrol
+- 17b65da: add text field component
+
 ## 0.0.5
 
 ### Patch Changes
