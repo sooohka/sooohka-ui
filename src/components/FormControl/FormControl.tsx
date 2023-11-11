@@ -9,11 +9,11 @@ import { UseComponentStateProps } from '@/utils/useComponentState';
 const formControlVariants = tv({
   slots: {
     container: `group flex 
-    aria-disabled:cursor-not-allowed aria-disabled:opacity-40 
-    aria-readonly:pointer-events-none
+      aria-disabled:cursor-not-allowed aria-disabled:opacity-40 
+      aria-readonly:pointer-events-none
     `,
     label: `
-    group-aria-required:after:ml-0.5 group-aria-required:after:text-red-500 group-aria-required:after:content-['*']
+      group-aria-required:after:ml-0.5 group-aria-required:after:text-red-500 group-aria-required:after:content-['*']
     `,
   },
   variants: {
@@ -61,7 +61,7 @@ const FormControl = forwardRef<HTMLLabelElement, TextfieldProps>((props, ref) =>
   return (
     <label ref={ref} className={container({ orientation, className })} {...stateProps} {...rest}>
       <span className={label({ orientation, className })}>{labelText}</span>
-      {children({})}
+      {children({ isDisabled, isInvalid, isReadonly, isRequired })}
     </label>
   );
 });

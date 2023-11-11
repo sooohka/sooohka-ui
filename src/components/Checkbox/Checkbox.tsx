@@ -93,6 +93,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           onKeyUp={onKeyUp}
           onChange={onChange}
           onBlur={onBlur}
+          tabIndex={isReadonly ? -1 : undefined}
           className={control({ size, colorScheme })}
           {...stateProps}
         />
