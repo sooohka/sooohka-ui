@@ -1,5 +1,11 @@
 # sooohka-ui
 
+## 0.0.6
+
+### Patch Changes
+
+- 17b65da: add text field component
+
 ## 0.0.5
 
 ### Patch Changes
