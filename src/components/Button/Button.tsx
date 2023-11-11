@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ComponentType, forwardRef, SVGAttributes } from 'react';
+import { ComponentType, DOMAttributes, forwardRef, SVGAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
 import { useComponentState } from '@/utils';
@@ -63,8 +63,9 @@ const buttonVariants = tv({
 
 const { button, icon } = buttonVariants();
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends DOMAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   isDisabled?: boolean;
+  className?: string | undefined;
   LeftIcon?: ComponentType<SVGAttributes<HTMLOrSVGElement>>;
   RightIcon?: ComponentType<SVGAttributes<HTMLOrSVGElement>>;
 }
