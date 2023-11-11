@@ -8,14 +8,14 @@ import { useComponentState } from '@/utils';
 
 const checkboxVariants = tv({
   slots: {
-    container: `group inline-flex items-center 
+    container: `group/checkbox inline-flex items-center 
       aria-disabled:cursor-not-allowed aria-disabled:opacity-40
       aria-readonly:pointer-events-none`,
     label: `font-medium
-    group-aria-invalid:text-red-500`,
+    group-aria-invalid/checkbox:text-red-500`,
     controlContainer: 'relative flex cursor-pointer items-center rounded-full',
     control: `before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none border transition-all duration-150 
-      group-aria-invalid:border-red-500 group-aria-invalid:text-red-500`,
+      group-aria-invalid/checkbox:border-red-500 group-aria-invalid/checkbox:text-red-500`,
     indicator: `pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100`,
     indicatorIcon: '',
   },

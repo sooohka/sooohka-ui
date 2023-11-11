@@ -23,10 +23,6 @@ const meta: Meta<typeof Textfield> = {
       control: 'radio',
       options: ['sm', 'md', 'lg'],
     },
-    orientation: {
-      control: 'radio',
-      options: ['horizontal', 'vertical'],
-    },
   },
 };
 
@@ -36,14 +32,6 @@ type Story = StoryObj<typeof Textfield>;
 
 export const Basic: Story = {
   args: {},
-  render: (args) => <Textfield {...args}>Name</Textfield>,
-};
-
-export const BasicHorizontal: Story = {
-  args: {
-    orientation: 'horizontal',
-    isRequired: true,
-  },
   render: (args) => <Textfield {...args}>Name</Textfield>,
 };
 
