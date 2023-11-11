@@ -1,5 +1,11 @@
 # sooohka-ui
 
+## 0.0.8
+
+### Patch Changes
+
+- d7fd3d9: add radio component
+
 ## 0.0.7
 
 ### Patch Changes
