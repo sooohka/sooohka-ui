@@ -2,6 +2,7 @@ import { BeakerIcon } from '@heroicons/react/24/solid';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '@/components';
+import { log } from '@/utils';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -37,12 +38,10 @@ type Story = StoryObj<typeof meta>;
 
 export const PrimarySolid: Story = {
   args: {
-    colorScheme: 'primary',
     size: 'md',
-    variant: 'solid',
     LeftIcon: BeakerIcon,
 
-    onClick: () => console.log('hi'),
+    onClick: () => log('hi'),
   },
   render: (args) => <Button {...args}>{'hello'}</Button>,
 };

@@ -3,7 +3,7 @@
 import { DOMAttributes, forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
+import { useComponentState } from '@/hooks';
 
 const textfieldVariants = tv({
   slots: {
@@ -65,7 +65,7 @@ export interface TextfieldProps
 
 const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
   const {
-    size,
+    size = 'md',
     isDisabled,
     isInvalid,
     isReadonly,

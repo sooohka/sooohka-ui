@@ -2,7 +2,7 @@
 import { DOMAttributes, forwardRef, ReactNode, SelectHTMLAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
+import { useComponentState } from '@/hooks';
 
 const selectVariants = tv({
   slots: {
@@ -29,9 +29,6 @@ const selectVariants = tv({
         container: 'gap-2 px-4 py-2.5 text-lg',
       },
     },
-  },
-  defaultVariants: {
-    size: 'md',
   },
 });
 
@@ -62,7 +59,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     className,
     children,
     LeftAddon,
-    size,
+    size = 'md',
     name,
     value,
     onKeyDown,

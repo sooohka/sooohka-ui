@@ -3,7 +3,7 @@
 import { DOMAttributes, forwardRef, InputHTMLAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-import { useComponentState } from '@/utils';
+import { useComponentState } from '@/hooks';
 
 const radioVariants = tv({
   slots: {
@@ -34,10 +34,6 @@ const radioVariants = tv({
       lg: { container: 'gap-2', control: 'h-5 w-5 before:h-2.5 before:w-2.5 ', label: 'text-lg' },
     },
   },
-  defaultVariants: {
-    colorScheme: 'primary',
-    size: 'lg',
-  },
 });
 const { container, label, controlContainer, control } = radioVariants();
 
@@ -60,8 +56,8 @@ export interface RadioProps
 }
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const {
-    size,
-    colorScheme,
+    size = 'md',
+    colorScheme = 'primary',
     className,
     children,
     isDisabled,

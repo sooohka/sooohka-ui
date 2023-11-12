@@ -1,1 +1,1 @@
-export { default as Textfield } from './Textfield';
+export { default as Textfield, type TextfieldProps } from './Textfield';
