@@ -5,15 +5,16 @@ import { useComponentState } from '@/hooks';
 
 const buttonVariants = tv({
   slots: {
-    button:
-      'inline-flex items-center rounded-lg text-center text-sm font-medium transition-all duration-150 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:opacity-40',
+    button: `inline-flex items-center rounded-lg text-center text-sm font-medium transition-colors duration-150 outline-none
+    focus:ring focus:ring-primary-200
+    disabled:cursor-not-allowed disabled:opacity-40`,
     icon: '',
   },
   variants: {
     variant: {
       solid: { button: 'border shadow-sm' },
       outline: { button: 'border shadow-sm' },
-      ghost: { button: 'border-none shadow-none ' },
+      ghost: { button: 'border-none shadow-none' },
       link: { button: 'border-none underline-offset-4 shadow-none hover:underline disabled:no-underline' },
     },
     size: {
@@ -23,42 +24,49 @@ const buttonVariants = tv({
       icon: { button: 'h-9 w-9 p-2' },
     },
     colorScheme: {
-      primary: { button: '' },
+      primary: 'red',
       secondary: { button: '' },
     },
   },
-  compoundSlots: [
+  compoundVariants: [
     {
-      slots: ['button'],
       colorScheme: 'primary',
       variant: 'solid',
-      class: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 disabled:hover:bg-primary-500',
+      class: {
+        button: `bg-primary-500 text-white
+        hover:bg-primary-600
+      active:bg-primary-700
+      disabled:hover:bg-primary-500`,
+      },
     },
     {
-      slots: ['button'],
       colorScheme: 'primary',
       variant: 'outline',
-      class:
-        'border-primary-300 text-primary-500 hover:border-primary-500 active:border-primary-700 active:shadow-primary-50 disabled:hover:border-primary-300',
+      class: {
+        button: `border-primary-300 text-primary-500
+        hover:border-primary-500
+        active:border-primary-700 active:shadow-primary-50
+        disabled:hover:border-primary-300`,
+      },
     },
     {
-      slots: ['button'],
       colorScheme: 'primary',
       variant: 'ghost',
-      class: 'text-primary-500 hover:bg-primary-50 active:bg-primary-100 disabled:hover:bg-inherit',
+      class: {
+        button: `text-primary-500
+        hover:bg-primary-50
+        active:bg-primary-100
+        disabled:hover:bg-inherit`,
+      },
     },
     {
-      slots: ['button'],
       colorScheme: 'primary',
       variant: 'link',
-      class: 'text-primary-500',
+      class: {
+        button: 'text-primary-500',
+      },
     },
   ],
-  defaultVariants: {
-    variant: 'solid',
-    size: 'md',
-    colorScheme: 'primary',
-  },
 });
 
 const { button, icon } = buttonVariants();
@@ -71,14 +79,24 @@ export interface ButtonProps extends DOMAttributes<HTMLButtonElement>, VariantPr
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, variant, colorScheme, isDisabled, size, children, LeftIcon, RightIcon, ...rest } = props;
+  const {
+    className,
+    variant = 'solid',
+    colorScheme = 'primary',
+    isDisabled,
+    size = 'md',
+    children,
+    LeftIcon,
+    RightIcon,
+    ...rest
+  } = props;
   const stateProps = useComponentState({ isDisabled });
   return (
     <>
       <button className={button({ variant, size, colorScheme, className })} ref={ref} {...stateProps} {...rest}>
-        {LeftIcon && <LeftIcon className={icon({ size })}></LeftIcon>}
+        {LeftIcon && <LeftIcon className={icon({ variant, colorScheme, size })}></LeftIcon>}
         {children}
-        {RightIcon && <RightIcon className={icon({ size })}></RightIcon>}
+        {RightIcon && <RightIcon className={icon({ variant, colorScheme, size })}></RightIcon>}
       </button>
     </>
   );

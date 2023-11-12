@@ -18,3 +18,7 @@ export function throwError(message?: string) {
 export function log(...args: Parameters<typeof console.log>) {
   console.log(...args);
 }
+
+export function passCallbackIfTrue(condition: boolean, callback?: (...args: unknown[]) => void) {
+  return condition ? callback : undefined;
+}

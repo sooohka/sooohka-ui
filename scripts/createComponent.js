@@ -64,6 +64,7 @@ export interface ${componentName}Props
 const ${componentName} = forwardRef<HTMLDivElement, ${componentName}Props>((props, ref) => {
   const { className, ...rest } = props;
   return <></>;
+${componentName}.displayName = '${componentName}';
 });
 
 export default ${componentName};

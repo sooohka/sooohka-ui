@@ -34,10 +34,6 @@ const checkboxVariants = tv({
       lg: { container: 'gap-2', control: 'h-5 w-5 rounded-md', label: 'text-lg', indicatorIcon: 'h-4 w-4' },
     },
   },
-  defaultVariants: {
-    colorScheme: 'primary',
-    size: 'lg',
-  },
 });
 const { container, label, controlContainer, indicator, indicatorIcon, control } = checkboxVariants();
 
@@ -60,8 +56,8 @@ export interface CheckboxProps
 }
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
-    size,
-    colorScheme,
+    size = 'md',
+    colorScheme = 'primary',
     className,
     children,
     isDisabled,

@@ -1,11 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Dropdown, DropdownList, DropdownListItem, DropdownListItemGroup, DropdownTrigger } from './Dropdown';
+import { Button } from '../Button';
+import { Dropdown, DropdownList, DropdownListItem, DropdownTrigger } from './Dropdown';
 
 const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    shouldCloseOnOutsideClick: {
+      control: { type: 'boolean' },
+    },
+    shouldCloseOnSelect: {
+      control: { type: 'boolean' },
+    },
+  },
 };
 
 export default meta;
@@ -13,36 +21,50 @@ export default meta;
 type Story = StoryObj<typeof Dropdown>;
 
 export const Basic: Story = {
-  args: {},
+  args: {
+    shouldCloseOnOutsideClick: false,
+    shouldCloseOnSelect: false,
+  },
   render: (args) => (
     <Dropdown {...args}>
       <DropdownTrigger>trigger</DropdownTrigger>
       <DropdownList>
-        <DropdownListItem>item</DropdownListItem>
-        <DropdownListItem>item1</DropdownListItem>
-        <DropdownListItem>item2</DropdownListItem>
+        <DropdownListItem>
+          <Button className="w-full" variant="ghost">
+            item
+          </Button>
+        </DropdownListItem>
+        <DropdownListItem>
+          <Button className="w-full" variant="ghost">
+            item2
+          </Button>
+        </DropdownListItem>
+        <DropdownListItem>
+          <Button variant="ghost">
+            Dolor proident ex laborum veniam ipsum ad Lorem culpa sint in incididunt Lorem fugiat commodo anim.
+          </Button>
+        </DropdownListItem>
       </DropdownList>
     </Dropdown>
   ),
 };
 
-// export const WithGroup: Story = {
-//   args: {},
-//   render: (args) => (
-//     <Dropdown {...args}>
-//       <DropdownTrigger>trigger</DropdownTrigger>
-//       <DropdownList>
-//         <DropdownListItemGroup>
-//           <DropdownListItem>item</DropdownListItem>
-//           <DropdownListItem>item1</DropdownListItem>
-//           <DropdownListItem>item2</DropdownListItem>
-//         </DropdownListItemGroup>
-//         <DropdownListItemGroup>
-//           <DropdownListItem>item</DropdownListItem>
-//           <DropdownListItem>item1</DropdownListItem>
-//           <DropdownListItem>item2</DropdownListItem>
-//         </DropdownListItemGroup>
-//       </DropdownList>
-//     </Dropdown>
-//   ),
-// };
+export const WithRenderProps: Story = {
+  args: {},
+  render: (args) => (
+    <Dropdown {...args}>
+      {({ triggerRef, onToggle }) => (
+        <>
+          <Button ref={triggerRef} variant="outline" onClick={onToggle}>
+            open
+          </Button>
+          <DropdownList>
+            <DropdownListItem>item</DropdownListItem>
+            <DropdownListItem>item1</DropdownListItem>
+            <DropdownListItem>item2</DropdownListItem>
+          </DropdownList>
+        </>
+      )}
+    </Dropdown>
+  ),
+};

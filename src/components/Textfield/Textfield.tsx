@@ -65,7 +65,7 @@ export interface TextfieldProps
 
 const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
   const {
-    size,
+    size = 'md',
     isDisabled,
     isInvalid,
     isReadonly,

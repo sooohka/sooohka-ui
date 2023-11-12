@@ -30,9 +30,6 @@ const selectVariants = tv({
       },
     },
   },
-  defaultVariants: {
-    size: 'md',
-  },
 });
 
 const { container, field, addon } = selectVariants();
@@ -62,7 +59,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     className,
     children,
     LeftAddon,
-    size,
+    size = 'md',
     name,
     value,
     onKeyDown,

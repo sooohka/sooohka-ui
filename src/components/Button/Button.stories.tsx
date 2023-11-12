@@ -38,9 +38,7 @@ type Story = StoryObj<typeof meta>;
 
 export const PrimarySolid: Story = {
   args: {
-    colorScheme: 'primary',
     size: 'md',
-    variant: 'solid',
     LeftIcon: BeakerIcon,
 
     onClick: () => log('hi'),
