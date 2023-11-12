@@ -1,6 +1,6 @@
 {
   "name": "sooohka-ui",
-  "version": "0.0.9",
+  "version": "0.0.12",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -21,8 +21,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.7",
-    "@tailwindcss/typography": "^0.5.10",
     "tailwind-variants": "^0.1.18"
   },
   "devDependencies": {

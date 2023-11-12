@@ -5,7 +5,7 @@ import { useComponentState } from '@/hooks';
 
 const buttonVariants = tv({
   slots: {
-    button: `inline-flex items-center rounded-lg text-center text-sm font-medium transition-colors duration-150 outline-none
+    button: `inline-flex items-center rounded-lg text-center text-sm font-medium outline-none transition-colors duration-150
     focus:ring focus:ring-primary-200
     disabled:cursor-not-allowed disabled:opacity-40`,
     icon: '',

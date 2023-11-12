@@ -13,6 +13,8 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true,
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "noEmit": true,
