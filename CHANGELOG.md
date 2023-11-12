@@ -1,5 +1,11 @@
 # sooohka-ui
 
+## 0.0.9
+
+### Patch Changes
+
+- cea367c: add dropdown component
+
 ## 0.0.8
 
 ### Patch Changes
