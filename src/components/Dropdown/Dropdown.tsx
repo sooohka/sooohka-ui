@@ -36,7 +36,7 @@ const [DropdownProvider, useDropdownContext] = createContextAndHook<DropdownCont
   triggerRef: { current: null },
 });
 
-const dropdownVariants = tv({
+export const dropdownVariants = tv({
   slots: {
     list: `invisible absolute left-0 z-10 mt-2 flex w-fit min-w-[10px] flex-col gap-1 rounded-lg border border-gray-100 bg-white py-2 text-left
     shadow-lg
@@ -72,7 +72,7 @@ export interface DropdownProps {
  * @argument shouldCloseOnSelect - if true, dropdown will close when user clicks on a dropdown item
  * @argument shouldCloseOnOutsideClick - if true, dropdown will close when user clicks outside of dropdown
  */
-const Dropdown = (props: DropdownProps) => {
+export const Dropdown = (props: DropdownProps) => {
   const { children, shouldCloseOnOutsideClick = true, shouldCloseOnSelect = true } = props;
   const [isOpen, setIsOpen] = useState(false);
   const menuListRef = useRef<HTMLUListElement | null>(null);
@@ -115,7 +115,7 @@ export interface DropdownTriggerProps extends DOMAttributes<HTMLButtonElement>, 
   children: ReactNode;
 }
 
-const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>((props, ref) => {
+export const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>((props, ref) => {
   const { children } = props;
   const { triggerRef, onToggle } = useDropdownContext();
   const refs = useMergeRefs(ref, triggerRef);
@@ -132,7 +132,7 @@ export interface DropdownListProps extends DOMAttributes<HTMLUListElement>, Vari
   className?: string | undefined;
   children?: ReactNode;
 }
-const DropdownList = forwardRef<HTMLUListElement, DropdownListProps>((props, ref) => {
+export const DropdownList = forwardRef<HTMLUListElement, DropdownListProps>((props, ref) => {
   const { children } = props;
   const { menuListRef, isOpen } = useDropdownContext();
   const refs = useMergeRefs(ref, menuListRef);
@@ -149,7 +149,7 @@ export interface DropdownListItemProps extends DOMAttributes<HTMLLIElement>, Var
   className?: string | undefined;
   children?: ReactNode;
 }
-const DropdownListItem = forwardRef<HTMLLIElement, DropdownListItemProps>((props, ref) => {
+export const DropdownListItem = forwardRef<HTMLLIElement, DropdownListItemProps>((props, ref) => {
   const { children } = props;
   const { shouldCloseOnSelect, onClose } = useDropdownContext();
   return (
@@ -159,5 +159,3 @@ const DropdownListItem = forwardRef<HTMLLIElement, DropdownListItemProps>((props
   );
 });
 DropdownListItem.displayName = 'DropdownListItem';
-
-export { Dropdown, DropdownList, DropdownListItem, DropdownTrigger };

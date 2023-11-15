@@ -53,7 +53,15 @@ export const Basic: Story = {
 import { DOMAttributes, forwardRef } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
-const ${componentName.toLocaleLowerCase()}Variants = tv({});
+const ${componentName.toLocaleLowerCase()}Variants = tv({
+  variants: {
+    size: {
+      sm: '',
+      md: '',
+      lg: '',
+    },
+  },
+});
 
 export interface ${componentName}Props
   extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
@@ -62,10 +70,10 @@ export interface ${componentName}Props
 }
 
 const ${componentName} = forwardRef<HTMLDivElement, ${componentName}Props>((props, ref) => {
-  const { className, ...rest } = props;
-  return <></>;
-${componentName}.displayName = '${componentName}';
+  const { className, size = 'md', ...rest } = props;
+  return <div ref={ref} className={container({ size, className })} {...rest}></div>;
 });
+${componentName}.displayName = '${componentName}';
 
 export default ${componentName};
     `;
