@@ -1,5 +1,11 @@
 # sooohka-ui
 
+## 0.0.13
+
+### Patch Changes
+
+- 13ea4a9: add card component
+
 ## 0.0.9
 
 ### Patch Changes
