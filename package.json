@@ -6,6 +6,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
+    "postinstall": "pnpm dlx husky install",
     "dev": "storybook dev -p 6006 --no-open",
     "build": "tsup src/index.ts --format cjs,esm --dts --minify",
     "release": "pnpm build && changeset version && changeset publish",
@@ -42,6 +43,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "lint-staged": "^15.1.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
@@ -52,5 +54,12 @@
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "bash -c tsc --noEmit",
+      "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+      "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore"
+    ]
   }
 }
