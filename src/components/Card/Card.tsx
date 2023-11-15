@@ -35,28 +35,44 @@ export interface CardProps
   className?: string | undefined;
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const { className, size = 'md', ...rest } = props;
   return <div ref={ref} className={container({ size, className })} {...rest}></div>;
 });
 Card.displayName = 'Card';
 
-const CardHeader = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+export interface CardHeaderProps
+  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
+    VariantProps<typeof cardVariants> {
+  className?: string | undefined;
+}
+
+export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>((props, ref) => {
   const { className, size = 'md', ...rest } = props;
   return <div ref={ref} className={header({ size, className })} {...rest}></div>;
 });
 CardHeader.displayName = 'CardHeader';
 
-const CardBody = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+export interface CardBodyProps
+  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
+    VariantProps<typeof cardVariants> {
+  className?: string | undefined;
+}
+
+export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) => {
   const { className, size = 'md', ...rest } = props;
   return <div ref={ref} className={body({ size, className })} {...rest}></div>;
 });
 CardBody.displayName = 'CardBody';
 
-const CardFooter = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+export interface CardFooterProps
+  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
+    VariantProps<typeof cardVariants> {
+  className?: string | undefined;
+}
+
+export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>((props, ref) => {
   const { className, size = 'md', ...rest } = props;
   return <div ref={ref} className={footer({ size, className })} {...rest}></div>;
 });
 CardFooter.displayName = 'CardFooter';
-
-export { Card, CardBody, CardFooter, CardHeader };
