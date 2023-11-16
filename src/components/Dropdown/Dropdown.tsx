@@ -1,10 +1,10 @@
 'use client';
 
+import { sva } from '@styled-system/css';
 import { DOMAttributes, forwardRef, MutableRefObject, ReactNode, useCallback, useRef, useState } from 'react';
-import { tv, VariantProps } from 'tailwind-variants';
 
 import { useClickAway, useMergeRefs } from '@/hooks';
-import { createContextAndHook, passCallbackIfTrue, runIfFn, throwError } from '@/utils';
+import { createContextAndHook, createStyleContext, passCallbackIfTrue, runIfFn, throwError } from '@/utils';
 
 import { Button } from '../Button';
 
@@ -36,24 +36,51 @@ const [DropdownProvider, useDropdownContext] = createContextAndHook<DropdownCont
   triggerRef: { current: null },
 });
 
-export const dropdownVariants = tv({
-  slots: {
-    list: `invisible absolute left-0 z-10 mt-2 flex w-fit min-w-[10px] flex-col gap-1 rounded-lg border border-gray-100 bg-white py-2 text-left
-    shadow-lg
-    data-[open='true']:visible
-    `,
-    listItemGroup: '',
-    listItem: '',
+export const dropdownVariants = sva({
+  slots: ['root', 'list', 'listItemGroup', 'listItem'],
+  base: {
+    root: {
+      position: 'relative',
+    },
+    list: {
+      visibility: 'hidden',
+      position: 'absolute',
+      left: 0,
+      zIndex: 10,
+      mt: 2,
+      display: 'flex',
+      w: 'fit-content',
+      minW: '10px',
+      flexDirection: 'column',
+      gap: 1,
+      borderRadius: 'lg',
+      border: '1px solid',
+      borderColor: 'gray.100',
+      bg: 'white',
+      py: 2,
+      textAlign: 'left',
+      boxShadow: 'lg',
+      '&[data-expanded="true"]': {
+        visibility: 'visible',
+      },
+    },
+    listItemGroup: {},
+    listItem: {},
   },
   variants: {
     size: {
-      sm: { list: '', listItemGroup: '', listItem: 'text-sm ' },
-      md: { list: '', listItemGroup: '', listItem: 'text-sm ' },
-      lg: { list: '', listItemGroup: '', listItem: 'text-sm ' },
+      sm: { list: {}, listItemGroup: {}, listItem: { fontSize: 'sm' } },
+      md: { list: {}, listItemGroup: {}, listItem: { fontSize: 'md' } },
+      lg: { list: {}, listItemGroup: {}, listItem: { fontSize: 'lg' } },
     },
   },
 });
-const { list, listItem } = dropdownVariants();
+
+const { withProvider, withContext } = createStyleContext(dropdownVariants);
+
+const Root = withProvider('div', 'root');
+const List = withContext('ul', 'list');
+const ListItem = withContext('li', 'listItem');
 
 interface T {
   isOpen: boolean;
@@ -72,7 +99,7 @@ export interface DropdownProps {
  * @argument shouldCloseOnSelect - if true, dropdown will close when user clicks on a dropdown item
  * @argument shouldCloseOnOutsideClick - if true, dropdown will close when user clicks outside of dropdown
  */
-export const Dropdown = (props: DropdownProps) => {
+export const DropdownRoot = (props: DropdownProps) => {
   const { children, shouldCloseOnOutsideClick = true, shouldCloseOnSelect = true } = props;
   const [isOpen, setIsOpen] = useState(false);
   const menuListRef = useRef<HTMLUListElement | null>(null);
@@ -104,13 +131,13 @@ export const Dropdown = (props: DropdownProps) => {
         onClose,
       }}
     >
-      <div className="relative">{runIfFn(children, { triggerRef, isOpen, onClose, onOpen, onToggle })}</div>
+      <Root>{runIfFn(children, { triggerRef, isOpen, onClose, onOpen, onToggle })}</Root>
     </DropdownProvider>
   );
 };
-Dropdown.displayName = 'Dropdown';
+DropdownRoot.displayName = 'Dropdown';
 
-export interface DropdownTriggerProps extends DOMAttributes<HTMLButtonElement>, VariantProps<typeof dropdownVariants> {
+export interface DropdownTriggerProps extends DOMAttributes<HTMLButtonElement> {
   className?: string | undefined;
   children: ReactNode;
 }
@@ -119,7 +146,6 @@ export const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProp
   const { children } = props;
   const { triggerRef, onToggle } = useDropdownContext();
   const refs = useMergeRefs(ref, triggerRef);
-
   return (
     <Button ref={refs} onClick={onToggle}>
       {children}
@@ -128,7 +154,7 @@ export const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProp
 });
 DropdownTrigger.displayName = 'DropdownTrigger';
 
-export interface DropdownListProps extends DOMAttributes<HTMLUListElement>, VariantProps<typeof dropdownVariants> {
+export interface DropdownListProps extends DOMAttributes<HTMLUListElement> {
   className?: string | undefined;
   children?: ReactNode;
 }
@@ -138,24 +164,32 @@ export const DropdownList = forwardRef<HTMLUListElement, DropdownListProps>((pro
   const refs = useMergeRefs(ref, menuListRef);
 
   return (
-    <ul data-open={isOpen} className={list()} ref={refs}>
+    <List data-expanded={isOpen} ref={refs}>
       {children}
-    </ul>
+    </List>
   );
 });
 DropdownList.displayName = 'DropdownList';
 
-export interface DropdownListItemProps extends DOMAttributes<HTMLLIElement>, VariantProps<typeof dropdownVariants> {
+export interface DropdownListItemProps extends DOMAttributes<HTMLLIElement> {
   className?: string | undefined;
   children?: ReactNode;
 }
 export const DropdownListItem = forwardRef<HTMLLIElement, DropdownListItemProps>((props, ref) => {
   const { children } = props;
   const { shouldCloseOnSelect, onClose } = useDropdownContext();
+
   return (
-    <li ref={ref} className={listItem()} onClickCapture={passCallbackIfTrue(shouldCloseOnSelect, onClose)}>
+    <ListItem ref={ref} onClickCapture={passCallbackIfTrue(shouldCloseOnSelect, onClose)}>
       {children}
-    </li>
+    </ListItem>
   );
 });
 DropdownListItem.displayName = 'DropdownListItem';
+
+export const Dropdown = {
+  Root: DropdownRoot,
+  Trigger: DropdownTrigger,
+  List: DropdownList,
+  ListItem: DropdownListItem,
+};

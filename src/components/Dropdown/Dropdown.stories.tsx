@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '../Button';
-import { Dropdown, DropdownList, DropdownListItem, DropdownTrigger } from './Dropdown';
+import { Dropdown } from './Dropdown';
 
-const meta: Meta<typeof Dropdown> = {
-  component: Dropdown,
+const meta: Meta<typeof Dropdown.Root> = {
+  component: Dropdown.Root,
   tags: ['autodocs'],
   argTypes: {
     shouldCloseOnOutsideClick: {
@@ -18,7 +18,7 @@ const meta: Meta<typeof Dropdown> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Dropdown>;
+type Story = StoryObj<typeof Dropdown.Root>;
 
 export const Basic: Story = {
   args: {
@@ -26,41 +26,41 @@ export const Basic: Story = {
     shouldCloseOnSelect: false,
   },
   render: (args) => (
-    <Dropdown {...args}>
-      <DropdownTrigger>trigger</DropdownTrigger>
-      <DropdownList>
-        <DropdownListItem>
+    <Dropdown.Root {...args}>
+      <Dropdown.Trigger>trigger</Dropdown.Trigger>
+      <Dropdown.List>
+        <Dropdown.ListItem>
           <Button variant="ghost">item</Button>
-        </DropdownListItem>
-        <DropdownListItem>
+        </Dropdown.ListItem>
+        <Dropdown.ListItem>
           <Button variant="ghost">item2</Button>
-        </DropdownListItem>
-        <DropdownListItem>
+        </Dropdown.ListItem>
+        <Dropdown.ListItem>
           <Button variant="ghost">
             Dolor proident ex laborum veniam ipsum ad Lorem culpa sint in incididunt Lorem fugiat commodo anim.
           </Button>
-        </DropdownListItem>
-      </DropdownList>
-    </Dropdown>
+        </Dropdown.ListItem>
+      </Dropdown.List>
+    </Dropdown.Root>
   ),
 };
 
 export const WithRenderProps: Story = {
   args: {},
   render: (args) => (
-    <Dropdown {...args}>
+    <Dropdown.Root {...args}>
       {({ triggerRef, onToggle }) => (
         <>
           <Button ref={triggerRef} variant="outline" onClick={onToggle}>
             open
           </Button>
-          <DropdownList>
-            <DropdownListItem>item</DropdownListItem>
-            <DropdownListItem>item1</DropdownListItem>
-            <DropdownListItem>item2</DropdownListItem>
-          </DropdownList>
+          <Dropdown.List>
+            <Dropdown.ListItem>item</Dropdown.ListItem>
+            <Dropdown.ListItem>item1</Dropdown.ListItem>
+            <Dropdown.ListItem>item2</Dropdown.ListItem>
+          </Dropdown.List>
         </>
       )}
-    </Dropdown>
+    </Dropdown.Root>
   ),
 };
