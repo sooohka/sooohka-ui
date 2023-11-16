@@ -30,14 +30,10 @@ export const Basic: Story = {
       <DropdownTrigger>trigger</DropdownTrigger>
       <DropdownList>
         <DropdownListItem>
-          <Button className="w-full" variant="ghost">
-            item
-          </Button>
+          <Button variant="ghost">item</Button>
         </DropdownListItem>
         <DropdownListItem>
-          <Button className="w-full" variant="ghost">
-            item2
-          </Button>
+          <Button variant="ghost">item2</Button>
         </DropdownListItem>
         <DropdownListItem>
           <Button variant="ghost">
