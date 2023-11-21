@@ -1,40 +1,21 @@
 import { defineConfig } from '@pandacss/dev';
 
+import { breakpoints, createSemanticTokens, createTokens, keyframes, textStyles } from '@/theme';
+
 export default defineConfig({
-  presets: ['@pandacss/preset-base', '@pandacss/preset-panda'],
-
-  // Whether to use css reset
   preflight: true,
-
-  // Where to look for your css declarations
-  include: ['./src/**/*.{js,jsx,ts,tsx}', './pages/**/*.{js,jsx,ts,tsx}'],
-
-  // Files to exclude
-  exclude: [],
-
-  // Useful for theme customization
+  presets: ['@pandacss/preset-base'],
   theme: {
     extend: {
-      tokens: {
-        colors: {
-          primary: {
-            50: { value: '#f1f9fe' },
-            100: { value: '#e2f2fc' },
-            200: { value: '#bfe3f8' },
-            300: { value: '#87cef2' },
-            400: { value: '#53baea' },
-            500: { value: '#209cd7' },
-            600: { value: '#127db7' },
-            700: { value: '#106494' },
-            800: { value: '#11557b' },
-            900: { value: '#144766' },
-            950: { value: '#0d2d44' },
-          },
-        },
-      },
+      breakpoints,
+      keyframes,
+      textStyles,
+      tokens: createTokens({ accentColor: 'plum', borderRadius: 'sm', grayColor: 'sand' }),
+      semanticTokens: createSemanticTokens({ accentColor: 'plum', borderRadius: 'sm', grayColor: 'sand' }),
     },
   },
-
-  // The output directory for your css system
+  include: ['./src/**/*.{js,jsx,ts,tsx}'],
+  exclude: [],
+  jsxFramework: 'react',
   outdir: 'styled-system',
 });

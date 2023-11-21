@@ -1,150 +1,195 @@
-import { css, RecipeVariantProps } from '@styled-system/css';
-import { sva } from '@styled-system/css';
-import { ComponentType, DOMAttributes, forwardRef, SVGAttributes } from 'react';
+import { cva, cx } from '@styled-system/css';
+import { RecipeVariantProps } from '@styled-system/types';
+import { forwardRef } from 'react';
 
-import { useComponentState } from '@/hooks';
-
-export const buttonVariants = sva({
-  slots: ['button', 'icon'],
+export const button = cva({
   base: {
-    button: {
-      cursor: 'pointer',
-      display: 'inline-flex',
-      alignItems: 'center',
-      rounded: 'lg',
-      textAlign: 'center',
-      fontSize: 'sm',
-      lineHeight: '1.5',
-      fontWeight: 'medium',
-      borderRadius: 'md',
-      ring: 'none',
-      ringOffset: 'none',
-      transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke',
-      transitionDuration: '150ms',
-      _focus: { shadow: 'ring' },
-      _disabled: { cursor: 'not-allowed', opacity: '0.4' },
-    },
-    icon: {},
+    alignItems: 'center',
+    appearance: 'none',
+    borderRadius: 'l2',
+    cursor: 'pointer',
+    display: 'inline-flex',
+    fontWeight: 'semibold',
+    minWidth: '0',
+    justifyContent: 'center',
+    outline: 'none',
+    transitionDuration: 'normal',
+    transitionProperty: 'background, border-color, color, box-shadow',
+    transitionTimingFunction: 'default',
+    userSelect: 'none',
+    verticalAlign: 'middle',
+    whiteSpace: 'nowrap',
+    // _hidden: {
+    //   display: 'none',
+    // },
+  },
+  defaultVariants: {
+    variant: 'solid',
+    size: 'md',
   },
   variants: {
     variant: {
-      solid: { button: { borderWidth: '1px', shadow: 'sm' } },
-      outline: { button: { borderWidth: '1px', shadow: 'none' } },
-      ghost: { button: { borderStyle: 'none', shadow: 'none' } },
-      link: {
-        button: {
-          borderStyle: 'none',
-          textUnderlineOffset: '4px',
-          shadow: 'none',
-          _hover: { textDecorationLine: 'underline', _disabled: { textDecorationLine: 'none' } },
-          _disabled: { textDecorationLine: 'none' },
+      solid: {
+        background: 'accent.default',
+        color: 'accent.fg',
+        _hover: {
+          background: 'accent.emphasized',
         },
+        _focusVisible: {
+          outlineOffset: '2px',
+          outline: '2px solid',
+          outlineColor: 'border.accent',
+        },
+        _disabled: {
+          color: 'fg.disabled',
+          background: 'gray.a3',
+          cursor: 'not-allowed',
+          _hover: {
+            color: 'fg.disabled',
+            background: 'gray.a3',
+          },
+        },
+      },
+      outline: {
+        borderWidth: '1px',
+        borderColor: 'border.default',
+        _hover: {
+          background: 'gray.a2',
+        },
+        _disabled: {
+          borderColor: 'border.disabled',
+          color: 'fg.disabled',
+          cursor: 'not-allowed',
+          _hover: {
+            background: 'transparent',
+            borderColor: 'border.disabled',
+            color: 'fg.disabled',
+          },
+        },
+        _focusVisible: {
+          outlineOffset: '2px',
+          outline: '2px solid',
+          outlineColor: 'border.outline',
+        },
+        _selected: {
+          background: 'gray.a3',
+        },
+      },
+      ghost: {
+        color: 'fg.default',
+        _hover: {
+          background: 'gray.a3',
+        },
+        _selected: {
+          background: 'gray.a3',
+        },
+        _disabled: {
+          color: 'fg.disabled',
+          cursor: 'not-allowed',
+          _hover: {
+            background: 'transparent',
+            color: 'fg.disabled',
+          },
+        },
+        _focusVisible: {
+          outline: '2px solid',
+          outlineColor: 'border.outline',
+        },
+      },
+      link: {
+        verticalAlign: 'baseline',
+        _disabled: {
+          color: 'border.disabled',
+          cursor: 'not-allowed',
+          _hover: {
+            color: 'border.disabled',
+          },
+        },
+        height: 'auto!',
+        px: '0!',
+        minW: '0!',
       },
     },
     size: {
+      xs: {
+        h: '8',
+        minW: '8',
+        textStyle: 'xs',
+        px: '3',
+        gap: '2',
+        '& svg': {
+          fontSize: 'md',
+          width: '4',
+          height: '4',
+        },
+      },
       sm: {
-        button: { gap: '1', pl: '3', pr: '3', pt: '1.5', pb: '1.5', fontSize: 'xs' },
-        icon: { h: '3', w: '3' },
+        h: '9',
+        minW: '9',
+        textStyle: 'sm',
+        px: '3.5',
+        gap: '2',
+        '& svg': {
+          width: '4',
+          height: '4',
+        },
       },
       md: {
-        button: {
-          gap: '1.5',
-          pl: '4',
-          pr: '4',
-          pt: '2',
-          pb: '2',
-          fontSize: 'sm',
+        h: '10',
+        minW: '10',
+        textStyle: 'sm',
+        px: '4',
+        gap: '2',
+        '& svg': {
+          width: '5',
+          height: '5',
         },
-        icon: { h: '4', w: '4' },
       },
       lg: {
-        button: { gap: '2', pl: '4', pr: '4', pt: '2.5', pb: '2.5', fontSize: 'lg' },
-        icon: { h: '5', w: '5' },
+        h: '11',
+        minW: '11',
+        textStyle: 'md',
+        px: '4.5',
+        gap: '2',
+        '& svg': {
+          width: '5',
+          height: '5',
+        },
       },
-      icon: { button: { h: '9', w: '9', p: '2' } },
-    },
-    colorScheme: {
-      primary: {
-        button: {},
-        icon: {},
+      xl: {
+        h: '12',
+        minW: '12',
+        textStyle: 'md',
+        px: '5',
+        gap: '2.5',
+        '& svg': {
+          width: '5',
+          height: '5',
+        },
       },
-    },
-  },
-
-  compoundVariants: [
-    {
-      colorScheme: 'primary',
-      variant: 'solid',
-      css: {
-        button: {
-          bgColor: 'primary.500',
-          color: 'white',
-          _hover: { bgColor: 'primary.600', _disabled: { bgColor: 'primary.500' } },
-          _active: { bgColor: 'primary.700' },
-          _disabled: { bgColor: 'primary.500' },
+      '2xl': {
+        h: '16',
+        minW: '16',
+        textStyle: 'lg',
+        px: '7',
+        gap: '3',
+        '& svg': {
+          width: '6',
+          height: '6',
         },
       },
     },
-    {
-      colorScheme: 'primary',
-      variant: 'outline',
-      css: {
-        button: {
-          borderColor: 'primary.300',
-          color: 'primary.500',
-          _hover: { borderColor: 'primary.500', _disabled: { borderColor: 'primary.300' } },
-          _active: { borderColor: 'primary.700', shadow: 'primary.50' },
-          _disabled: { borderColor: 'primary.300' },
-        },
-      },
-    },
-    {
-      colorScheme: 'primary',
-      variant: 'ghost',
-      css: {
-        button: {
-          color: 'primary.500',
-          _hover: { bgColor: 'primary.50', _disabled: { bgColor: 'inherit' } },
-          _active: { bgColor: 'primary.100' },
-          _disabled: { bgColor: 'inherit' },
-        },
-      },
-    },
-    {
-      colorScheme: 'primary',
-      variant: 'link',
-      css: {
-        button: { color: 'primary.500' },
-      },
-    },
-  ],
-  defaultVariants: {
-    size: 'md',
-    colorScheme: 'primary',
-    variant: 'solid',
   },
 });
 
-export type ButtonProps = DOMAttributes<HTMLButtonElement> &
-  RecipeVariantProps<typeof buttonVariants> & {
-    isDisabled?: boolean;
-    LeftIcon?: ComponentType<SVGAttributes<HTMLOrSVGElement>>;
-    RightIcon?: ComponentType<SVGAttributes<HTMLOrSVGElement>>;
-  };
+export type ButtonProps = RecipeVariantProps<typeof button> & {
+  className?: string;
+};
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { variant, colorScheme, isDisabled, size, children, LeftIcon, RightIcon, ...rest } = props;
-  const { button, icon } = buttonVariants.raw({ colorScheme, size, variant });
-  const stateProps = useComponentState({ isDisabled });
-  return (
-    <>
-      <button className={css(button)} ref={ref} {...stateProps} {...rest}>
-        {LeftIcon && <LeftIcon className={css(icon, {})}></LeftIcon>}
-        {children}
-        {RightIcon && <RightIcon className={css(icon, {})}></RightIcon>}
-      </button>
-    </>
-  );
+const Button = forwardRef<HTMLDivElement, ButtonProps>((props, ref) => {
+  const { className, size, variant, ...rest } = props;
+  const styles = button({ size, variant });
+  return <div ref={ref} className={cx(styles, className)} {...rest}></div>;
 });
 Button.displayName = 'Button';
 

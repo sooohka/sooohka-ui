@@ -1,5 +1,5 @@
 {
-  "include": ["src", "styled-system"],
+  "include": ["src", "styled-system", "panda.config.ts"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",

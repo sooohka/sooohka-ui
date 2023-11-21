@@ -1,7 +1,4 @@
 module.exports = {
-  // tailwindConfig: './tailwind.config.cjs',
-  plugins: ["prettier-plugin-tailwindcss"],
-  tailwindFunctions: ['tv'],
   semi: true,
   trailingComma: 'all',
   singleQuote: true,

@@ -12,9 +12,14 @@ export default function useComponentState(props: UseComponentStateProps) {
     disabled: isDisabled,
     readOnly: isReadonly,
     required: isRequired,
-    'aria-invalid': isInvalid,
-    'aria-required': isRequired,
-    'aria-readonly': isReadonly,
-    'aria-disabled': isDisabled,
+    'aria-invalid': isInvalid || undefined,
+    'aria-required': isRequired || undefined,
+    'aria-read-only': isReadonly || undefined,
+    'aria-disabled': isDisabled || undefined,
+
+    'data-invalid': isInvalid || undefined,
+    'data-required': isRequired || undefined,
+    'data-read-only': isReadonly || undefined,
+    'data-disabled': isDisabled || undefined,
   };
 }
