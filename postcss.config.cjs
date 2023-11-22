@@ -1,7 +1,7 @@
 module.exports = {
   plugins: {
-    'postcss-aspect-ratio': {},
     autoprefixer: {},
+    'postcss-aspect-ratio': {},
     '@pandacss/dev/postcss': {},
   },
 };

@@ -5,7 +5,11 @@ import Button from './Button';
 const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    isDisabled: {
+      control: 'boolean',
+    },
+  },
 };
 
 export default meta;

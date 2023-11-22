@@ -1,6 +1,9 @@
+'use client';
 import { cva, cx } from '@styled-system/css';
 import { RecipeVariantProps } from '@styled-system/types';
-import { forwardRef } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
+
+import { useComponentState } from '@/hooks';
 
 export const button = cva({
   base: {
@@ -19,13 +22,6 @@ export const button = cva({
     userSelect: 'none',
     verticalAlign: 'middle',
     whiteSpace: 'nowrap',
-    // _hidden: {
-    //   display: 'none',
-    // },
-  },
-  defaultVariants: {
-    variant: 'solid',
-    size: 'md',
   },
   variants: {
     variant: {
@@ -37,7 +33,8 @@ export const button = cva({
         },
         _focusVisible: {
           outlineOffset: '2px',
-          outline: '2px solid',
+          outlineStyle: 'solid',
+          outlineWidth: '2px',
           outlineColor: 'border.accent',
         },
         _disabled: {
@@ -111,18 +108,6 @@ export const button = cva({
       },
     },
     size: {
-      xs: {
-        h: '8',
-        minW: '8',
-        textStyle: 'xs',
-        px: '3',
-        gap: '2',
-        '& svg': {
-          fontSize: 'md',
-          width: '4',
-          height: '4',
-        },
-      },
       sm: {
         h: '9',
         minW: '9',
@@ -156,40 +141,25 @@ export const button = cva({
           height: '5',
         },
       },
-      xl: {
-        h: '12',
-        minW: '12',
-        textStyle: 'md',
-        px: '5',
-        gap: '2.5',
-        '& svg': {
-          width: '5',
-          height: '5',
-        },
-      },
-      '2xl': {
-        h: '16',
-        minW: '16',
-        textStyle: 'lg',
-        px: '7',
-        gap: '3',
-        '& svg': {
-          width: '6',
-          height: '6',
-        },
-      },
     },
+  },
+  defaultVariants: {
+    variant: 'solid',
+    size: 'md',
   },
 });
 
-export type ButtonProps = RecipeVariantProps<typeof button> & {
-  className?: string;
-};
+export type ButtonProps = HTMLAttributes<HTMLButtonElement> &
+  RecipeVariantProps<typeof button> & {
+    className?: string;
+    isDisabled?: boolean;
+  };
 
-const Button = forwardRef<HTMLDivElement, ButtonProps>((props, ref) => {
-  const { className, size, variant, ...rest } = props;
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const { className, size, isDisabled, variant, ...rest } = props;
   const styles = button({ size, variant });
-  return <div ref={ref} className={cx(styles, className)} {...rest}></div>;
+  const formControlProps = useComponentState({ isDisabled });
+  return <button ref={ref} className={cx(styles, className)} {...formControlProps} {...rest}></button>;
 });
 Button.displayName = 'Button';
 

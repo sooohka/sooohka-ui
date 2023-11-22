@@ -7,10 +7,10 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "panda codegen",
-    "watch": "concurrently \"pnpm postcss -o output.css .storybook/main.css \" \"pnpm type --watch\"",
     "postinstall": "pnpm dlx husky install",
     "dev": "storybook dev -p 6006 --no-open",
-    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
+    "debug": "panda debug && postcss -o ./styled-system/debug/output.css ./src/styles/index.css",
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --external @styled-system/css",
     "release": "pnpm build && changeset version && changeset publish",
     "changeSet": "changeset",
     "check": "pnpm tsc && pnpm lint:fix && pnpm lint:format",
@@ -24,6 +24,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@ark-ui/anatomy": "^1.1.0",
     "@ark-ui/react": "^1.0.1",
     "@pandacss/types": "^0.18.3",
     "lucide-react": "^0.292.0"

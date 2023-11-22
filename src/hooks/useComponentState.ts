@@ -10,13 +10,9 @@ export default function useComponentState(props: UseComponentStateProps) {
 
   return {
     disabled: isDisabled,
-    readOnly: isReadonly,
+    ['read-only']: isReadonly,
     required: isRequired,
-    'aria-invalid': isInvalid || undefined,
-    'aria-required': isRequired || undefined,
-    'aria-read-only': isReadonly || undefined,
-    'aria-disabled': isDisabled || undefined,
-
+    invalid: isInvalid,
     'data-invalid': isInvalid || undefined,
     'data-required': isRequired || undefined,
     'data-read-only': isReadonly || undefined,

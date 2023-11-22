@@ -18,4 +18,5 @@ export default defineConfig({
   exclude: [],
   jsxFramework: 'react',
   outdir: 'styled-system',
+  clean: true,
 });
