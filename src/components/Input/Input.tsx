@@ -10,9 +10,9 @@ const inputVariants = sva({
   base: {
     root: {
       appearance: 'none',
-      backgroundColor: 'bg.default',
-      borderColor: 'border.emphasized',
-      borderRadius: 'l2',
+      backgroundColor: 'bg',
+      borderColor: 'border',
+      borderRadius: 'md',
       borderWidth: '1px',
       outline: 0,
       position: 'relative',
@@ -35,23 +35,15 @@ const inputVariants = sva({
         cursor: 'not-allowed',
       },
       _focus: {
-        borderColor: 'border.accent',
-        boxShadow: 'accent',
+        borderColor: 'primary',
+        boxShadow: 'primary',
       },
     },
   },
   defaultVariants: {
     size: 'md',
-    colorScheme: 'primary',
   },
   variants: {
-    colorScheme: {
-      primary: {
-        root: {
-          borderColor: 'accent.default',
-        },
-      },
-    },
     size: {
       sm: { root: { px: '2.5', h: '9', minW: '9', fontSize: 'sm' } },
       md: { root: { px: '3', h: '10', minW: '10', fontSize: 'md' } },
@@ -69,10 +61,10 @@ export type InputProps = HTMLAttributes<HTMLInputElement> &
   };
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { className, size, colorScheme, isDisabled, isInvalid, isReadonly, ...rest } = props;
+  const { className, size, isDisabled, isInvalid, isReadonly, ...rest } = props;
   const formControlProps = useComponentState({ isDisabled, isInvalid, isReadonly });
 
-  const { root } = inputVariants({ size, colorScheme });
+  const { root } = inputVariants({ size });
   return <input ref={ref} className={cx(root, className)} {...formControlProps} {...rest}></input>;
 });
 Input.displayName = 'Input';

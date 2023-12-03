@@ -13,7 +13,7 @@ export const accordionVariants = sva({
       width: 'full',
     },
     item: {
-      borderColor: 'border.default',
+      borderColor: 'border',
     },
     itemTrigger: {
       alignItems: 'center',
@@ -24,7 +24,7 @@ export const accordionVariants = sva({
       width: 'full',
     },
     itemIndicator: {
-      color: 'fg.muted',
+      color: 'text',
       transformOrigin: 'center',
       transitionDuration: 'normal',
       transitionProperty: 'transform',
@@ -34,7 +34,7 @@ export const accordionVariants = sva({
       },
     },
     itemContent: {
-      color: 'fg.muted',
+      color: 'text',
       display: 'grid',
       gridTemplateRows: '0fr',
       transitionProperty: 'grid-template-rows, padding-bottom',
@@ -53,7 +53,18 @@ export const accordionVariants = sva({
   },
   variants: {
     size: {
-      sm: {},
+      sm: {
+        itemTrigger: {
+          py: '2',
+        },
+        itemContent: {
+          pb: '3',
+          pr: '4',
+          _closed: {
+            pb: '0',
+          },
+        },
+      },
       md: {
         itemTrigger: {
           py: '4',
@@ -66,7 +77,18 @@ export const accordionVariants = sva({
           },
         },
       },
-      lg: {},
+      lg: {
+        itemTrigger: {
+          py: '6',
+        },
+        itemContent: {
+          pb: '9',
+          pr: '12',
+          _closed: {
+            pb: '0',
+          },
+        },
+      },
     },
   },
 });

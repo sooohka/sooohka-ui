@@ -20,15 +20,15 @@ const checkboxVariants = sva({
       },
     },
     label: {
-      color: 'fg.emphasized',
+      color: 'text',
       fontWeight: 'medium',
     },
     control: {
       alignItems: 'center',
-      borderColor: 'border.default',
+      borderColor: 'border',
       borderWidth: '1px',
       borderStyle: 'solid',
-      color: 'accent.fg',
+      color: 'white',
       cursor: 'pointer',
       display: 'flex',
       justifyContent: 'center',
@@ -36,20 +36,23 @@ const checkboxVariants = sva({
       transitionProperty: 'border-color, background',
       transitionTimingFunction: 'default',
       _hover: {
-        background: 'bg.subtle',
+        background: 'gray.100',
       },
       _checked: {
-        background: 'accent.default',
-        borderColor: 'border.accent',
+        background: 'primary',
+        borderColor: 'border.primary',
         _hover: {
-          background: 'accent.default',
+          background: 'primary.hover',
         },
       },
       _disabled: {
         cursor: 'not-allowed',
+        _hover: {
+          background: 'primary',
+        },
       },
       _groupInvalid: {
-        borderColor: 'red.10',
+        borderColor: 'danger',
       },
     },
   },
@@ -65,7 +68,7 @@ const checkboxVariants = sva({
         control: {
           width: '4',
           height: '4',
-          borderRadius: 'l1',
+          borderRadius: 'sm',
           '& svg': {
             width: '3',
             height: '3',
@@ -82,7 +85,7 @@ const checkboxVariants = sva({
         control: {
           width: '5',
           height: '5',
-          borderRadius: 'l1',
+          borderRadius: 'sm',
           '& svg': {
             width: '3.5',
             height: '3.5',
@@ -99,7 +102,7 @@ const checkboxVariants = sva({
         control: {
           width: '6',
           height: '6',
-          borderRadius: 'l1',
+          borderRadius: 'md',
           '& svg': {
             width: '4',
             height: '4',

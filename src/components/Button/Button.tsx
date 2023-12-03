@@ -9,7 +9,7 @@ export const button = cva({
   base: {
     alignItems: 'center',
     appearance: 'none',
-    borderRadius: 'l2',
+    borderRadius: 'md',
     cursor: 'pointer',
     display: 'inline-flex',
     fontWeight: 'semibold',
@@ -26,71 +26,71 @@ export const button = cva({
   variants: {
     variant: {
       solid: {
-        background: 'accent.default',
-        color: 'accent.fg',
+        background: 'primary',
+        color: 'white',
         _hover: {
-          background: 'accent.emphasized',
+          background: 'primary.hover',
+        },
+        _active: {
+          background: 'primary.active',
         },
         _focusVisible: {
           outlineOffset: '2px',
           outlineStyle: 'solid',
           outlineWidth: '2px',
-          outlineColor: 'border.accent',
+          outlineColor: 'border.primary',
         },
         _disabled: {
-          color: 'fg.disabled',
-          background: 'gray.a3',
+          opacity: '0.4',
           cursor: 'not-allowed',
           _hover: {
-            color: 'fg.disabled',
-            background: 'gray.a3',
+            background: 'primary',
           },
         },
       },
       outline: {
         borderWidth: '1px',
-        borderColor: 'border.default',
+        borderColor: 'border',
         _hover: {
-          background: 'gray.a2',
+          background: 'gray.100',
+        },
+        _active: {
+          background: 'gray.200',
         },
         _disabled: {
-          borderColor: 'border.disabled',
-          color: 'fg.disabled',
+          opacity: '0.4',
           cursor: 'not-allowed',
           _hover: {
             background: 'transparent',
-            borderColor: 'border.disabled',
-            color: 'fg.disabled',
           },
         },
         _focusVisible: {
           outlineOffset: '2px',
-          outline: '2px solid',
-          outlineColor: 'border.outline',
-        },
-        _selected: {
-          background: 'gray.a3',
+          outlineStyle: 'solid',
+          outlineWidth: '2px',
+          outlineColor: 'border',
         },
       },
       ghost: {
-        color: 'fg.default',
+        color: 'text',
         _hover: {
-          background: 'gray.a3',
+          background: 'gray.100',
         },
-        _selected: {
-          background: 'gray.a3',
+        _active: {
+          background: 'gray.200',
         },
         _disabled: {
-          color: 'fg.disabled',
+          opacity: '0.4',
           cursor: 'not-allowed',
           _hover: {
             background: 'transparent',
-            color: 'fg.disabled',
           },
         },
         _focusVisible: {
-          outline: '2px solid',
-          outlineColor: 'border.outline',
+          outlineOffset: '2px',
+          outlineStyle: 'solid',
+          outlineWidth: '2px',
+          outlineColor: 'border',
         },
       },
       link: {
@@ -98,16 +98,25 @@ export const button = cva({
         _hover: {
           textDecoration: 'underline',
         },
+        _active: {
+          textDecoration: 'underline',
+        },
         _disabled: {
-          color: 'border.disabled',
+          opacity: '0.4',
           cursor: 'not-allowed',
           _hover: {
-            color: 'border.disabled',
+            textDecoration: 'none',
           },
         },
-        height: 'auto!',
-        px: '0!',
-        minW: '0!',
+        _focusVisible: {
+          outlineOffset: '2px',
+          outlineStyle: 'solid',
+          outlineWidth: '2px',
+          outlineColor: 'border',
+        },
+        height: 'auto',
+        px: '0',
+        minW: '0',
       },
     },
     size: {
