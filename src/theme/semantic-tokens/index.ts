@@ -14,6 +14,7 @@ export const createSemanticTokens = (options: PresetOptions) => {
       ...colors,
       gray: createColorPalette(grayColor),
       accent: createAccentColorPalette(accentColor),
+      invalid: { value: '{colors.red.9}' },
       bg: {
         canvas: { value: '{colors.gray.1}' },
         default: { value: { base: '{colors.white}', _dark: '{colors.gray.2}' } },

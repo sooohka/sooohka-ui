@@ -95,6 +95,9 @@ export const button = cva({
       },
       link: {
         verticalAlign: 'baseline',
+        _hover: {
+          textDecoration: 'underline',
+        },
         _disabled: {
           color: 'border.disabled',
           cursor: 'not-allowed',

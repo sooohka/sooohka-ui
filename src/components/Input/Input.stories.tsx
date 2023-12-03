@@ -5,7 +5,21 @@ import Input from './Input';
 const meta: Meta<typeof Input> = {
   component: Input,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    isDisabled: {
+      control: 'boolean',
+    },
+    isInvalid: {
+      control: 'boolean',
+    },
+    isReadonly: {
+      control: 'boolean',
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    },
+  },
 };
 
 export default meta;
