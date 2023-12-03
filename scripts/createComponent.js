@@ -50,28 +50,39 @@ export const Basic: Story = {
 };
 `;
   const componentTemplate = `'use client';
-import { DOMAttributes, forwardRef } from 'react';
-import { tv, VariantProps } from 'tailwind-variants';
+import { cx, sva } from '@styled-system/css';
+import { RecipeVariantProps } from '@styled-system/types';
+import { forwardRef, HTMLAttributes } from 'react';
 
-const ${componentName.toLocaleLowerCase()}Variants = tv({
+const ${componentName.toLocaleLowerCase()}Variants = sva({
+  slots : [],
+  base : {},
   variants: {
+    colorScheme: {
+      primary: {}
+    },
     size: {
-      sm: '',
-      md: '',
-      lg: '',
+      sm: {},
+      md: {},
+      lg: {},
+    },
+  defaultVariants: {
+    colorScheme: 'primary',
+    size: 'md',
     },
   },
 });
 
-export interface ${componentName}Props
-  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
-    VariantProps<typeof ${componentName.toLocaleLowerCase()}Variants> {
-  className?: string | undefined;
-}
+export type ${componentName}Props = HTMLAttributes<HTMLDivElement> &
+  RecipeVariantProps<typeof ${componentName.toLocaleLowerCase()}Variants> & {
+    className?: string | undefined;
+  };
+
 
 const ${componentName} = forwardRef<HTMLDivElement, ${componentName}Props>((props, ref) => {
-  const { className, size = 'md', ...rest } = props;
-  return <div ref={ref} className={container({ size, className })} {...rest}></div>;
+  const { className, size, colorScheme, ...rest } = props;
+  const {} = ${componentName.toLocaleLowerCase()}Variants({ size, colorScheme });
+  return <div ref={ref} className={cx(className)} {...rest}></div>;
 });
 ${componentName}.displayName = '${componentName}';
 

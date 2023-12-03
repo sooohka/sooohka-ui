@@ -12,6 +12,21 @@ const meta: Meta<typeof Avatar> = {
         options: ['sm', 'md', 'lg'],
       },
     },
+    fallback: {
+      control: {
+        type: 'text',
+      },
+    },
+    src: {
+      control: {
+        type: 'text',
+      },
+    },
+    alt: {
+      control: {
+        type: 'text',
+      },
+    },
   },
 };
 
@@ -19,23 +34,12 @@ export default meta;
 
 type Story = StoryObj<typeof Avatar>;
 
-export const Sm: Story = {
-  args: {
-    size: 'sm',
-  },
-  render: (args) => <Avatar {...args} />,
-};
-
-export const Md: Story = {
+export const Basic: Story = {
   args: {
     size: 'md',
-  },
-  render: (args) => <Avatar {...args} />,
-};
-
-export const Lg: Story = {
-  args: {
-    size: 'lg',
+    fallback: 'J',
+    src: 'https://i.pravatar.cc/300',
+    alt: 'J',
   },
   render: (args) => <Avatar {...args} />,
 };

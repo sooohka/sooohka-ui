@@ -1,78 +1,122 @@
 'use client';
-import { DOMAttributes, forwardRef } from 'react';
-import { tv, VariantProps } from 'tailwind-variants';
+import { sva } from '@styled-system/css';
+import { styled } from '@styled-system/jsx';
 
-const cardVariants = tv({
-  slots: {
-    container: 'relative flex min-w-[200px] flex-col rounded-lg border bg-white shadow-sm',
-    header: 'flex flex-col',
-    body: 'flex flex-col',
-    footer: 'flex justify-between',
+import { createStyleContext } from '@/lib';
+
+const cardVariants = sva({
+  slots: ['root', 'header', 'content', 'footer', 'title', 'description'],
+  base: {
+    root: {
+      bg: 'bg.default',
+      boxShadow: 'lg',
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+    },
+    header: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    content: {
+      display: 'flex',
+      flex: '1',
+      flexDirection: 'column',
+    },
+    footer: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+    },
+    title: {
+      textStyle: 'lg',
+      fontWeight: 'semibold',
+    },
+    description: {
+      color: 'fg.muted',
+      textStyle: 'sm',
+    },
   },
   variants: {
     size: {
       sm: {
-        container: 'gap-4 p-4 text-sm',
-        header: '',
-        body: '',
-        footer: '',
+        root: {
+          borderRadius: 'md',
+          maxW: 'sm',
+        },
+        header: {
+          gap: '1',
+          p: '3',
+        },
+        content: {
+          pb: '3',
+          px: '3',
+        },
+        footer: {
+          pb: '3',
+          pt: '1',
+          px: '3',
+        },
       },
       md: {
-        container: 'text-md gap-6 p-4',
-        header: '',
-        body: '',
-        footer: '',
+        root: {
+          borderRadius: 'md',
+          maxW: 'md',
+        },
+        header: {
+          gap: '1',
+          p: '6',
+        },
+        content: {
+          pb: '6',
+          px: '6',
+        },
+        footer: {
+          pb: '6',
+          pt: '2',
+          px: '6',
+        },
+      },
+      lg: {
+        root: {
+          borderRadius: 'xl',
+          maxW: 'lg',
+        },
+        header: {
+          gap: '2',
+          p: '8',
+        },
+        content: {
+          pb: '8',
+          px: '8',
+        },
+        footer: {
+          pb: '8',
+          pt: '3',
+          px: '8',
+        },
       },
     },
   },
+  defaultVariants: {
+    size: 'md',
+  },
 });
 
-const { container, header, body, footer } = cardVariants();
+const { withProvider, withContext } = createStyleContext(cardVariants);
+const CardRoot = withProvider(styled('div'), 'root');
+export const CardContent = withContext(styled('div'), 'content');
+export const CardDescription = withContext(styled('p'), 'description');
+export const CardFooter = withContext(styled('div'), 'footer');
+export const CardHeader = withContext(styled('div'), 'header');
+export const CardTitle = withContext(styled('h3'), 'title');
 
-export interface CardProps
-  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
-    VariantProps<typeof cardVariants> {
-  className?: string | undefined;
-}
-
-export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
-  const { className, size = 'md', ...rest } = props;
-  return <div ref={ref} className={container({ size, className })} {...rest}></div>;
+const Card = Object.assign(CardRoot, {
+  Root: CardRoot,
+  Content: CardContent,
+  Description: CardDescription,
+  Footer: CardFooter,
+  Header: CardHeader,
+  Title: CardTitle,
 });
-Card.displayName = 'Card';
 
-export interface CardHeaderProps
-  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
-    VariantProps<typeof cardVariants> {
-  className?: string | undefined;
-}
-
-export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>((props, ref) => {
-  const { className, size = 'md', ...rest } = props;
-  return <div ref={ref} className={header({ size, className })} {...rest}></div>;
-});
-CardHeader.displayName = 'CardHeader';
-
-export interface CardBodyProps
-  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
-    VariantProps<typeof cardVariants> {
-  className?: string | undefined;
-}
-
-export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) => {
-  const { className, size = 'md', ...rest } = props;
-  return <div ref={ref} className={body({ size, className })} {...rest}></div>;
-});
-CardBody.displayName = 'CardBody';
-
-export interface CardFooterProps
-  extends Omit<DOMAttributes<HTMLDivElement>, 'onChange' | 'onKeyUp' | 'onKeyDown' | 'onBlur'>,
-    VariantProps<typeof cardVariants> {
-  className?: string | undefined;
-}
-
-export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>((props, ref) => {
-  const { className, size = 'md', ...rest } = props;
-  return <div ref={ref} className={footer({ size, className })} {...rest}></div>;
-});
-CardFooter.displayName = 'CardFooter';
+export default Card;

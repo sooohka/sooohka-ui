@@ -1,6 +1,7 @@
 module.exports = {
   plugins: {
-    tailwindcss: {},
     autoprefixer: {},
-  }
-}
+    'postcss-aspect-ratio': {},
+    '@pandacss/dev/postcss': {},
+  },
+};
