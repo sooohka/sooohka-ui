@@ -1,10 +1,11 @@
 {
   "name": "sooohka-ui",
-  "version": "0.0.14",
+  "version": "0.0.17",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "bin": "./scripts/init.js",
   "scripts": {
     "prepare": "panda codegen",
     "postinstall": "pnpm dlx husky install",
@@ -25,13 +26,13 @@
   "license": "MIT",
   "dependencies": {
     "@ark-ui/anatomy": "^1.1.0",
-    "@ark-ui/react": "^1.0.1",
+    "@ark-ui/react": "^1.1.0",
     "@pandacss/types": "^0.18.3",
-    "lucide-react": "^0.292.0"
+    "lucide-react": "^0.294.0"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
-    "@pandacss/dev": "^0.18.3",
+    "@pandacss/dev": "^0.20.1",
     "@park-ui/panda-preset": "^0.23.0",
     "@radix-ui/colors": "^3.0.0",
     "@storybook/addon-essentials": "^7.5.3",
