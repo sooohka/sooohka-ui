@@ -8,7 +8,7 @@ const cardVariants = sva({
   slots: ['root', 'header', 'content', 'footer', 'title', 'description'],
   base: {
     root: {
-      bg: 'bg.default',
+      bg: 'bg',
       boxShadow: 'lg',
       display: 'flex',
       flexDirection: 'column',
@@ -32,7 +32,7 @@ const cardVariants = sva({
       fontWeight: 'semibold',
     },
     description: {
-      color: 'fg.muted',
+      color: 'text',
       textStyle: 'sm',
     },
   },

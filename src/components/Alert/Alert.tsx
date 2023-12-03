@@ -8,10 +8,10 @@ const alertVariants = sva({
   slots: ['root', 'content', 'description', 'icon', 'title'],
   base: {
     root: {
-      background: 'bg.default',
+      background: 'bg',
       borderWidth: '1px',
-      borderRadius: 'l3',
-      borderColor: 'border.default',
+      borderRadius: 'md',
+      borderColor: 'border',
       display: 'flex',
       gap: '3',
       p: '4',
@@ -23,11 +23,11 @@ const alertVariants = sva({
       gap: '1',
     },
     description: {
-      color: 'fg.muted',
+      color: 'text',
       textStyle: 'sm',
     },
     icon: {
-      color: 'fg.emphasized',
+      color: 'text',
       flexShrink: '0',
       width: '5',
       height: '5',
@@ -41,16 +41,16 @@ const alertVariants = sva({
     colorScheme: {
       primary: {
         root: {
-          borderColor: 'border.accent',
+          borderColor: 'border.primary',
         },
         icon: {
-          color: 'accent.default',
+          color: 'primary',
         },
         title: {
-          color: 'accent.default',
+          color: 'primary',
         },
         description: {
-          color: 'accent.8',
+          color: 'primary',
         },
       },
       natural: {},

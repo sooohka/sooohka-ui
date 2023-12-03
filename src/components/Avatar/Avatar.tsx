@@ -10,14 +10,14 @@ const avatarVariants = sva({
     root: {
       borderRadius: 'full',
       borderWidth: '1px',
-      borderColor: 'border.default',
+      borderColor: 'border',
       flexShrink: 0,
     },
     fallback: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'bg.subtle',
+      background: 'bg',
       fontWeight: 'semibold',
       height: 'inherit',
     },
