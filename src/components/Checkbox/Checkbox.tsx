@@ -1,6 +1,5 @@
 'use client';
-import { Checkbox as ArkCheckbox } from '@ark-ui/react';
-import { UseCheckboxProps } from '@ark-ui/react/checkbox/use-checkbox';
+import { Checkbox as ArkCheckbox, CheckboxProps as ArkCheckboxProps } from '@ark-ui/react';
 import { cx, sva } from '@styled-system/css';
 import { RecipeVariantProps } from '@styled-system/types';
 import { CheckIcon, MinusIcon } from 'lucide-react';
@@ -116,7 +115,7 @@ const checkboxVariants = sva({
   },
 });
 
-export type CheckboxProps = UseCheckboxProps &
+export type CheckboxProps = ArkCheckboxProps &
   RecipeVariantProps<typeof checkboxVariants> & {
     className?: string | undefined;
     isDisabled?: boolean;
