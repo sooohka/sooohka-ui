@@ -26,13 +26,14 @@ function colorGreen(string) {
   return `\x1b[32m ${string}\x1b[0m`;
 }
 
-(async function () {
+async function run() {
   const rl = createInterface({ input: stdin, output: stdout });
 
   let componentFolderPath = './src/components/ui';
   let hooksFolderPath = './src/hooks';
   let libFolderPath = './src/lib';
-  let shouldInstall = false;
+  let shouldInstall = true;
+  let shouldAddScripts = true;
 
   if (opt === '-y') {
   } else {
@@ -40,6 +41,7 @@ function colorGreen(string) {
     hooksFolderPath = (await rl.question('Input hooks folder name [./src/hooks]:')) || hooksFolderPath;
     libFolderPath = (await rl.question('Input lib folder name [./src/lib]:')) || libFolderPath;
     shouldInstall = (await rl.question('Install dependencies? [y/n]:')) === 'n' ? false : shouldInstall;
+    shouldAddScripts = (await rl.question('Add scripts to package.json? [y/n]:')) === 'n' ? false : shouldAddScripts;
   }
   rl.close();
 
@@ -47,6 +49,11 @@ function colorGreen(string) {
     spawnSync('pnpm', ['add', '@ark-ui/react@latest'], { stdio: 'inherit' });
     spawnSync('pnpm', ['add', 'lucide-react@latest'], { stdio: 'inherit' });
     spawnSync('pnpm', ['add', '@pandacss/dev@latest', '-D'], { stdio: 'inherit' });
+    console.log(colorGreen('Dependencies installed'));
+  }
+  if(shouldAddScripts) {
+    addScripts();
+    console.log(colorGreen('Package.json Scripts added'));
   }
 
   try {
@@ -61,7 +68,7 @@ function colorGreen(string) {
   } catch (e) {
     console.error(colorRed(e.message));
   }
-})();
+}
 
 function copyComponents(toPath) {
   const components = [];
@@ -80,8 +87,6 @@ function copyComponents(toPath) {
     },
   });
   components.forEach((component) => {
-    console.log(component);
-
     fs.appendFileSync(
       path.join(toPath, './index.ts'),
       `export { default as ${component} } from './${component}/${component}';\n`,
@@ -141,3 +146,38 @@ function copyConfigs(toPath) {
     force: false,
   });
 }
+
+function addScripts() {
+  const packageJsonPath = path.join(toRootPath, 'package.json');
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, { encoding: 'utf-8' }));
+  let scripts = packageJson.scripts;
+  if (scripts['prepare']) {
+    console.log(colorRed('prepare script already exists'));
+    process.exit(1);
+  }
+  if (scripts['check']) {
+    console.log(colorRed('check script already exists'));
+    process.exit(1);
+  }
+  if (scripts['type']) {
+    console.log(colorRed('type script already exists'));
+    process.exit(1);
+  }
+  if (scripts['lint:fix']) {
+    console.log(colorRed('lint:fix script already exists'));
+    process.exit(1);
+  }
+  if (scripts['lint:format']) {
+    console.log(colorRed('lint:format script already exists'));
+    process.exit(1);
+  }
+  scripts['prepare'] = 'panda build';
+  scripts['check'] = 'panda check';
+  scripts['type'] = 'panda type';
+  scripts['lint:fix'] = 'panda lint:fix';
+  scripts['lint:format'] = 'panda lint:format';
+
+  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+}
+
+run();
