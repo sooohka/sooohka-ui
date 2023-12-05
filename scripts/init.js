@@ -32,7 +32,7 @@ function colorGreen(string) {
   let componentFolderPath = './src/components/ui';
   let hooksFolderPath = './src/hooks';
   let libFolderPath = './src/lib';
-  let shouldInstall = true;
+  let shouldInstall = false;
 
   if (opt === '-y') {
   } else {
@@ -93,7 +93,7 @@ function copyHooks(toPath) {
   const hooks = [];
   fs.readdirSync(fromHooksFolderPath).forEach((v) => {
     if (v !== 'index.ts') {
-      hooks.push(v.replace('.ts', ''));
+      hooks.push(v.replace(/\.(ts|tsx)$/gm, ''));
     }
   });
   fs.cpSync(fromHooksFolderPath, toPath, {
@@ -114,7 +114,7 @@ function copyLibs(toPath) {
   const libs = [];
   fs.readdirSync(fromLibFolderPath).forEach((v) => {
     if (v !== 'index.ts') {
-      libs.push(v.replace('.ts', ''));
+      libs.push(v.replace(/\.(ts|tsx)$/gm, ''));
     }
   });
   fs.cpSync(fromLibFolderPath, toPath, {
@@ -127,7 +127,7 @@ function copyLibs(toPath) {
     },
   });
   libs.forEach((lib) => {
-    fs.appendFileSync(path.join(toPath, 'index.ts'), `export { default as ${lib} } from './${lib}';\n`);
+    fs.appendFileSync(path.join(toPath, 'index.ts'), `export * from './${lib}';\n`);
   });
 }
 
