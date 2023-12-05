@@ -1,2 +1,2 @@
-export * from './create-style-context';
+export * from './createStyleContext';
 export * from './helper';
