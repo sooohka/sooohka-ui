@@ -19,13 +19,6 @@ const fromLibFolderPath = path.join(rootPath, '..', 'src/lib');
 const fromConfigFolderPath = path.join(rootPath, '..');
 const toRootPath = process.env.PWD ?? '';
 
-function colorRed(string) {
-  return `\x1b[31m ${string}\x1b[0m`;
-}
-function colorGreen(string) {
-  return `\x1b[32m ${string}\x1b[0m`;
-}
-
 async function run() {
   const rl = createInterface({ input: stdin, output: stdout });
 
@@ -46,12 +39,10 @@ async function run() {
   rl.close();
 
   if (shouldInstall) {
-    spawnSync('pnpm', ['add', '@ark-ui/react@latest'], { stdio: 'inherit' });
-    spawnSync('pnpm', ['add', 'lucide-react@latest'], { stdio: 'inherit' });
-    spawnSync('pnpm', ['add', '@pandacss/dev@latest', '-D'], { stdio: 'inherit' });
+    addDependencies();
     console.log(colorGreen('Dependencies installed'));
   }
-  if(shouldAddScripts) {
+  if (shouldAddScripts) {
     addScripts();
     console.log(colorGreen('Package.json Scripts added'));
   }
@@ -67,7 +58,15 @@ async function run() {
     console.log(colorGreen('Configs copied'));
   } catch (e) {
     console.error(colorRed(e.message));
+    process.exit(1);
   }
+}
+
+function addDependencies() {
+  spawnSync('pnpm', ['add', '@ark-ui/react@latest'], { stdio: 'inherit' });
+  spawnSync('pnpm', ['add', 'lucide-react@latest'], { stdio: 'inherit' });
+  spawnSync('pnpm', ['add', '@pandacss/dev@latest', '-D'], { stdio: 'inherit' });
+  spawnSync('pnpm', ['add', 'postcss-aspect-ratio', '-D'], { stdio: 'inherit' });
 }
 
 function copyComponents(toPath) {
@@ -178,6 +177,14 @@ function addScripts() {
   scripts['lint:format'] = 'panda lint:format';
 
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+}
+
+function colorRed(string) {
+  return `\x1b[31m ${string}\x1b[0m`;
+}
+
+function colorGreen(string) {
+  return `\x1b[32m ${string}\x1b[0m`;
 }
 
 run();

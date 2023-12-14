@@ -11,7 +11,7 @@
     "postinstall": "pnpm dlx husky install",
     "dev": "storybook dev -p 6006 --no-open",
     "debug": "panda debug && postcss -o ./styled-system/debug/output.css ./src/styles/index.css",
-    "build": "tsup src/index.ts --format cjs,esm --dts --minify --external @styled-system/css",
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --external @styled-system/css --external @styled-system/jsx",
     "release": "pnpm build && changeset version && changeset publish",
     "changeSet": "changeset",
     "check": "pnpm tsc && pnpm lint:fix && pnpm lint:format",
